@@ -1,6 +1,8 @@
 package com.nabun_upgrade.nabun;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,38 +14,42 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.nabun_upgrade.fragment.HomeFragment;
 
 public class MainActivity extends FragmentActivity {
 
-    private static final int TAB_ITEM = 2;
-    private Toolbar toolbar;
+    private static final int TAB_ITEM = 3;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private SectionPagerAdapter mSectionsPagerAdapter;
+    private String tabTitles[] = new String[] { "ListView", "RecyclerView" };
+    private int[] iconId = {R.drawable.icon_1, R.drawable.icon_2, R.drawable.icon_3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.pager);
 
-        if (toolbar != null) {
-            //setSupportActionBar(toolbar);
-        }
-
         mSectionsPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
-
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {
@@ -56,10 +62,13 @@ public class MainActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new ListViewFragment();
+                    return new HomeFragment();
                 case 1:
-                default:
+                    return new ListViewFragment();
+                case 2:
                     return new RecyclerViewFragment();
+                default:
+                    return new HomeFragment();
             }
         }
 
@@ -70,14 +79,23 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
+            // return tabTitles[position];
+            // getDrawable(int i) is deprecated, use getDrawable(int i, Theme theme) for min SDK >=21
+            // Drawable image = context.getResources().getDrawable(iconIds[position], context.getTheme());
 
-            switch (position) {
-                case 0:
-                    return "ListView";
-                case 1:
-                default:
-                    return "RecyclerView";
+            Drawable image;
+            if(android.os.Build.VERSION.SDK_INT >= 21) {
+                image = getResources().getDrawable(iconId[position], getTheme());
+            } else {
+                image = getResources().getDrawable(iconId[position]);
             }
+            if (image != null) {
+                image.setBounds(0, 0, 50, 50);
+            }
+            SpannableString sb = new SpannableString(" ");
+            ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+            sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return sb;
         }
     }
 
