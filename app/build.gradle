@@ -25,4 +25,5 @@ dependencies {
     compile 'com.yalantis:phoenix:1.2.2'
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.blunderer:materialdesignlibrary:2.0.4'
 }

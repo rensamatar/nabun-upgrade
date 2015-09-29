@@ -16,6 +16,7 @@ public class BaseRefreshFragment extends Fragment {
 
     public static final String KEY_ICON = "icon";
     public static final String KEY_COLOR = "color";
+    public static final String KEY_TITLE = "title";
 
     protected List<Map<String, Integer>> mSampleList;
 
@@ -36,10 +37,16 @@ public class BaseRefreshFragment extends Fragment {
                 R.color.eggplant,
                 R.color.sienna};
 
+        int[] titles = {
+                R.string.home_about,
+                R.string.home_vision,
+                R.string.home_mission};
+
         for (int i = 0; i < icons.length; i++) {
             map = new HashMap<>();
             map.put(KEY_ICON, icons[i]);
             map.put(KEY_COLOR, colors[i]);
+            //map.put((KEY_TITLE, titles[i]);
             mSampleList.add(map);
         }
     }
