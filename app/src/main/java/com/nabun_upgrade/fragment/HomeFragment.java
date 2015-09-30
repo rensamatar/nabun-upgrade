@@ -1,18 +1,21 @@
 package com.nabun_upgrade.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nabun_upgrade.nabun.BaseRefreshFragment;
+import com.nabun_upgrade.nabun.DetailActivity;
 import com.nabun_upgrade.nabun.R;
 
 import java.util.ArrayList;
@@ -77,6 +80,13 @@ public class HomeFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         listView.setAdapter(new HomeAdapter(getActivity(), R.layout.home_list_item, mHomeList));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
         return rootView;
     }
