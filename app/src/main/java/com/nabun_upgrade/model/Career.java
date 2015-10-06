@@ -3,6 +3,13 @@ package com.nabun_upgrade.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.nabun_upgrade.utility.AppFunctions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
 /**
  * Created by admin on 9/29/2015.
  */
@@ -15,6 +22,8 @@ public class Career implements Parcelable {
     private String banner;
     private String created_at;
     private String updated_at;
+
+    public Career() {}
 
     public int getId() {
         return id;
@@ -78,6 +87,27 @@ public class Career implements Parcelable {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+
+    public Career(JSONObject object) {
+        Iterator<String> dataIter = object.keys();
+        while (dataIter.hasNext()) {
+            try {
+                String key = dataIter.next();
+                if (key.equalsIgnoreCase("id")) {
+                    if (AppFunctions.checkJSONObjectForKey(key, object)) {
+                        this.setId(object.getInt(key));
+                    }
+                } else if (key.equalsIgnoreCase("name")) {
+                    if (AppFunctions.checkJSONObjectForKey(key, object)) {
+                        this.setName(object.getString(key));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
