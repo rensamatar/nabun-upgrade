@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".DetailActivity"
                   android:label="Nabun" />
+        <activity android:name=".EventViewActivity"
+                  android:label="Nabun" />
     </application>
 
 </manifest>

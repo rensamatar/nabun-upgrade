@@ -2,12 +2,9 @@ package com.nabun_upgrade.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.nabun_upgrade.utility.AppFunctions;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Iterator;
 
 /**
@@ -17,6 +14,7 @@ public class Career implements Parcelable {
     private int id;
     private String name;
     private String title;
+    private String summary;
     private String body;
     private String author;
     private String banner;
@@ -47,6 +45,14 @@ public class Career implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getBody() {
@@ -120,6 +126,7 @@ public class Career implements Parcelable {
         dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(title);
+        dest.writeString(summary);
         dest.writeString(body);
         dest.writeString(author);
         dest.writeString(banner);
@@ -131,6 +138,7 @@ public class Career implements Parcelable {
         id = in.readInt();
         name = in.readString();
         title = in.readString();
+        summary = in.readString();
         body = in.readString();
         author = in.readString();
         banner = in.readString();

@@ -1,12 +1,11 @@
 package com.nabun_upgrade.config;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.nabun_upgrade.utility.LruBitmapCache;
 
 /**
  * Created by admin on 10/6/2015.
@@ -14,10 +13,9 @@ import com.nabun_upgrade.utility.LruBitmapCache;
 public class Application extends android.app.Application {
 
     public static final String TAG = Application.class.getSimpleName();
-    public static final String BASE_URL = "http://www.json-generator.com/api/json/get/chugZkjLtu?indent=2";
+    public static final String BASE_URL = "http://www.json-generator.com/api/json/get/bTYCmEHKPS?indent=2";
     private static Application mInstance;
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
 
     @Override
     public void onCreate() {
@@ -29,19 +27,15 @@ public class Application extends android.app.Application {
         return mInstance;
     }
 
+    public static Context getAppContext() {
+        return mInstance.getApplicationContext();
+    }
+
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
-    }
-
-    public ImageLoader getImageLoader() {
-        getRequestQueue();
-        if (mImageLoader == null) {
-            mImageLoader = new ImageLoader(this.mRequestQueue, new LruBitmapCache());
-        }
-        return this.mImageLoader;
     }
 
     public <T> void addToRequestQueue(Request<T> req, String tag) {
@@ -50,14 +44,5 @@ public class Application extends android.app.Application {
         getRequestQueue().add(req);
     }
 
-    public <T> void addToRequestQueue(Request<T> req) {
-        req.setTag(TAG);
-        getRequestQueue().add(req);
-    }
 
-    public void cancelPendingRequests(Object tag) {
-        if (mRequestQueue != null) {
-            mRequestQueue.cancelAll(tag);
-        }
-    }
 }

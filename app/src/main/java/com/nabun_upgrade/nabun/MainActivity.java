@@ -14,8 +14,9 @@ import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.nabun_upgrade.fragment.CareerFragment;
+import com.nabun_upgrade.fragment.EventFragment;
 import com.nabun_upgrade.fragment.HomeFragment;
-import com.nabun_upgrade.fragment.RecyclerViewFragment;
 
 public class MainActivity extends FragmentActivity {
 
@@ -52,9 +53,9 @@ public class MainActivity extends FragmentActivity {
                 case 0:
                     return new HomeFragment();
                 case 1:
-                    return new ListViewFragment();
+                    return new CareerFragment();
                 case 2:
-                    return new RecyclerViewFragment();
+                    return new EventFragment();
                 default:
                     return new HomeFragment();
             }

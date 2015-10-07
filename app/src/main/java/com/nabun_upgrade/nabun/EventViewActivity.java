@@ -8,14 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 /**
- * Created by admin on 9/30/2015.
+ * Created by admin on 10/7/2015.
  */
-public class DetailActivity extends AppCompatActivity {
+public class EventViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_event_view);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Detail");
+        collapsingToolbar.setTitle("Event");
     }
 
     @Override
@@ -40,5 +40,4 @@ public class DetailActivity extends AppCompatActivity {
             default: return super.onOptionsItemSelected(item);
         }
     }
-
 }
