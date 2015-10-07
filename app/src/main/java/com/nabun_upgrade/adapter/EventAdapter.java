@@ -7,10 +7,14 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.nabun_upgrade.model.Event;
@@ -34,6 +38,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private ImageLoader mImageLoader;
     private VolleySingleton mVolleySingleton;
     private DateFormat mFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    private Context mContext;
+
+    private static OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public static interface OnItemClickListener {
+        public void onItemClick(Event event);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,6 +61,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         mInflater = LayoutInflater.from(context);
         mVolleySingleton = VolleySingleton.getInstance();
         mImageLoader = mVolleySingleton.getImageLoader();
+        mContext = context;
     }
 
     public void setEvent(ArrayList<Event> listEvent) {
@@ -62,7 +78,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Event currentEvent = mEventList.get(position);
+        final Event currentEvent = mEventList.get(position);
 
         holder.title.setText(currentEvent.getTitle());
         holder.summary.setText(currentEvent.getSummary());
@@ -77,6 +93,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         // Retrieve image file
         String banner = currentEvent.getBanner();
         loadImages(banner, holder);
+
     }
 
     private void loadImages(String banner, final ViewHolder holder) {
@@ -96,15 +113,28 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        FrameLayout frameLayout;
         ImageView thumbnail;
         TextView title;
         TextView summary;
 
+        private Event ev;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            frameLayout = (FrameLayout) itemView.findViewById(R.id.frame_layout);
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
             title = (TextView) itemView.findViewById(R.id.title);
             summary = (TextView) itemView.findViewById(R.id.summary);
+
+            frameLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(ev);
+                    }
+                }
+            });
         }
     }
 }
