@@ -18,9 +18,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.nabun_upgrade.adapter.EventAdapter;
 import com.nabun_upgrade.config.Application;
 import com.nabun_upgrade.model.Event;
+import com.nabun_upgrade.model.Photos;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ public class EventFragment extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView recyclerView;
     private ArrayList<Event> listEvent = new ArrayList<>();
+    private ArrayList<Photos> listPhoto = new ArrayList<>();
     private EventAdapter mAdapter;
 
     private JsonArrayRequest request;
@@ -88,7 +91,7 @@ public class EventFragment extends Fragment {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        request = new JsonArrayRequest(Application.BASE_URL, new Response.Listener<JSONArray>() {
+        request = new JsonArrayRequest(Application.EVENT, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(Application.TAG, response.toString());
@@ -116,9 +119,29 @@ public class EventFragment extends Fragment {
         Event ev = new Event();
         ev.setId(object.optInt("id"));
         ev.setTitle(object.optString("title"));
-        ev.setSummary(object.optString("summary"));
-        ev.setBody(object.optString("body"));
         ev.setBanner(object.optString("banner"));
+        ev.setAuthor(object.optString("author"));
+        ev.setBody(object.optString("body"));
+        try {
+            JSONObject obj = object.getJSONObject("photos");
+            for (int i = 0; i < obj.length(); i++) {
+                Photos photo = new Photos();
+                photo.setImg_01(obj.optString("img_01"));
+                photo.setImg_02(obj.optString("img_02"));
+                photo.setImg_03(obj.optString("img_03"));
+                photo.setImg_04(obj.optString("img_04"));
+                photo.setImg_05(obj.optString("img_05"));
+                photo.setImg_06(obj.optString("img_06"));
+                photo.setImg_07(obj.optString("img_07"));
+                photo.setImg_08(obj.optString("img_08"));
+                listPhoto.add(photo);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ev.setPublished_date(object.optString("published_date"));
+        ev.setCreated_at(object.optString("created_at"));
+        ev.setUpdated_at(object.optString("updated_at"));
         listEvent.add(ev);
         mAdapter.setEvent(listEvent);
     }

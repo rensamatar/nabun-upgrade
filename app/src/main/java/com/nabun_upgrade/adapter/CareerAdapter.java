@@ -57,7 +57,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         Career currentItem = mCareerList.get(position);
 
         holder.title.setText(currentItem.getTitle());
-        holder.summary.setText(currentItem.getSummary());
+        holder.attribute.setText(currentItem.getAttribute());
 //        Date createdDate = currentItem.getCreated_at();
 //        if (createdDate != null) {
 //            String formattedDate = mFormatter.format(createdDate);
@@ -90,13 +90,13 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail;
         TextView title;
-        TextView summary;
+        TextView attribute;
 
         public ViewHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
             title = (TextView) itemView.findViewById(R.id.title);
-            summary = (TextView) itemView.findViewById(R.id.summary);
+            attribute = (TextView) itemView.findViewById(R.id.attribute);
         }
     }
 }

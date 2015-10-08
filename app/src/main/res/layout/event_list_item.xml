@@ -20,31 +20,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-    <ImageView
-      android:id="@+id/image_view_icon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:contentDescription="@null"
-      android:src="@drawable/icon_3"/>
     <TextView
       android:id="@+id/title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:text="Fujitsu General"
-      android:textColor="#ffffff"
+      android:textColor="@color/white"
+      android:gravity="center"
       android:textAlignment="center"
-      android:textSize="40dp"/>
+      android:textSize="@dimen/material_text_headline"/>
     <TextView
-      android:id="@+id/summary"
+      android:id="@+id/created_at"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:text="Making Air condition"
-      android:textColor="#ffffff"
+      android:gravity="center"
+      android:textColor="@color/white"
       android:textAlignment="center"
-      android:textSize="20dp"/>
+      android:textSize="@dimen/material_text_subhead"/>
   </LinearLayout>
 
 </FrameLayout>

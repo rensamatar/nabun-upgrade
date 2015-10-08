@@ -18,9 +18,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.nabun_upgrade.adapter.CareerAdapter;
 import com.nabun_upgrade.config.Application;
 import com.nabun_upgrade.model.Career;
+import com.nabun_upgrade.model.Staff;
+import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
@@ -34,6 +37,8 @@ public class CareerFragment extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView recyclerView;
     private ArrayList<Career> listEvent = new ArrayList<>();
+    private ArrayList<Wage> listWage = new ArrayList<>();
+    private ArrayList<Staff> listStaff = new ArrayList<>();
     private CareerAdapter mAdapter;
 
     private JsonArrayRequest request;
@@ -89,7 +94,7 @@ public class CareerFragment extends Fragment {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        request = new JsonArrayRequest(Application.BASE_URL, new Response.Listener<JSONArray>() {
+        request = new JsonArrayRequest(Application.CAREER, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(Application.TAG, response.toString());
@@ -117,9 +122,53 @@ public class CareerFragment extends Fragment {
         Career career = new Career();
         career.setId(object.optInt("id"));
         career.setTitle(object.optString("title"));
-        career.setSummary(object.optString("summary"));
-        career.setBody(object.optString("body"));
         career.setBanner(object.optString("banner"));
+        career.setAuthor(object.optString("author"));
+        career.setAttribute(object.optString("attribute"));
+        career.setGender(object.optString("gender"));
+        career.setAge(object.optString("age"));
+        career.setQualifications(object.optString("qualifications"));
+        try {
+            JSONObject wr = object.getJSONObject("wage");
+            for (int i = 0; i < wr.length(); i++) {
+                Wage wage = new Wage();
+                wage.setW1(wr.optString("w1"));
+                wage.setW2(wr.optString("w2"));
+                wage.setW3(wr.optString("w3"));
+                wage.setW4(wr.optString("w4"));
+                wage.setW5(wr.optString("w5"));
+                wage.setW6(wr.optString("w6"));
+                wage.setW7(wr.optString("w7"));
+                wage.setW8(wr.optString("w8"));
+                wage.setW9(wr.optString("w9"));
+                wage.setW10(wr.optString("w10"));
+                wage.setW11(wr.optString("w11"));
+                wage.setW12(wr.optString("w12"));
+                wage.setW13(wr.optString("w13"));
+                wage.setW14(wr.optString("w14"));
+                wage.setW15(wr.optString("w15"));
+                wage.setW16(wr.optString("w16"));
+                listWage.add(wage);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            JSONArray array = object.getJSONArray("staff");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject ob = array.getJSONObject(i);
+                Staff staff = new Staff();
+                staff.setId(ob.optString("id"));
+                staff.setNickname(ob.optString("nickname"));
+                staff.setPhone(ob.optString("phone"));
+                listStaff.add(staff);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        career.setPublished_date(object.optString("published_date"));
+        career.setCreated_at(object.optString("created_at"));
+        career.setUpdated_at(object.optString("updated_at"));
         listEvent.add(career);
         mAdapter.setCareer(listEvent);
     }

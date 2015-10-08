@@ -13,7 +13,9 @@ import com.android.volley.toolbox.Volley;
 public class Application extends android.app.Application {
 
     public static final String TAG = Application.class.getSimpleName();
-    public static final String BASE_URL = "http://www.json-generator.com/api/json/get/bTYCmEHKPS?indent=2";
+    public static final String BASE_URL = "http://nabun-upgrade.com/api/";
+    public static final String EVENT = BASE_URL + "event";
+    public static final String CAREER = BASE_URL + "career";
     private static Application mInstance;
     private RequestQueue mRequestQueue;
 

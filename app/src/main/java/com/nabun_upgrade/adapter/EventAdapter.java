@@ -81,7 +81,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         final Event currentEvent = mEventList.get(position);
 
         holder.title.setText(currentEvent.getTitle());
-        holder.summary.setText(currentEvent.getSummary());
+        holder.created_at.setText(currentEvent.getCreated_at());
 //        Date createdDate = currentEvent.getCreated_at();
 //        if (createdDate != null) {
 //            String formattedDate = mFormatter.format(createdDate);
@@ -116,7 +116,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         FrameLayout frameLayout;
         ImageView thumbnail;
         TextView title;
-        TextView summary;
+        TextView created_at;
 
         private Event ev;
 
@@ -125,7 +125,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             frameLayout = (FrameLayout) itemView.findViewById(R.id.frame_layout);
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
             title = (TextView) itemView.findViewById(R.id.title);
-            summary = (TextView) itemView.findViewById(R.id.summary);
+            created_at = (TextView) itemView.findViewById(R.id.created_at);
 
             frameLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

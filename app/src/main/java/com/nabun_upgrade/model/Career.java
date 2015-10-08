@@ -5,6 +5,8 @@ import android.os.Parcelable;
 import com.nabun_upgrade.utility.AppFunctions;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -12,12 +14,16 @@ import java.util.Iterator;
  */
 public class Career implements Parcelable {
     private int id;
-    private String name;
     private String title;
-    private String summary;
-    private String body;
-    private String author;
     private String banner;
+    private String author;
+    private String attribute;
+    private String gender;
+    private String age;
+    private String qualifications;
+    private ArrayList<Wage> wage;
+    private ArrayList<Staff> staff;
+    private String published_date;
     private String created_at;
     private String updated_at;
 
@@ -31,14 +37,6 @@ public class Career implements Parcelable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -47,20 +45,12 @@ public class Career implements Parcelable {
         this.title = title;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getBanner() {
+        return banner;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 
     public String getAuthor() {
@@ -71,12 +61,60 @@ public class Career implements Parcelable {
         this.author = author;
     }
 
-    public String getBanner() {
-        return banner;
+    public String getAttribute() {
+        return attribute;
     }
 
-    public void setBanner(String banner) {
-        this.banner = banner;
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(String qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public ArrayList<Wage> getWage() {
+        return wage;
+    }
+
+    public void setWage(ArrayList<Wage> wage) {
+        this.wage = wage;
+    }
+
+    public ArrayList<Staff> getStaff() {
+        return staff;
+    }
+
+    public void setStaff(ArrayList<Staff> staff) {
+        this.staff = staff;
+    }
+
+    public String getPublished_date() {
+        return published_date;
+    }
+
+    public void setPublished_date(String published_date) {
+        this.published_date = published_date;
     }
 
     public String getCreated_at() {
@@ -95,7 +133,6 @@ public class Career implements Parcelable {
         this.updated_at = updated_at;
     }
 
-
     public Career(JSONObject object) {
         Iterator<String> dataIter = object.keys();
         while (dataIter.hasNext()) {
@@ -105,9 +142,9 @@ public class Career implements Parcelable {
                     if (AppFunctions.checkJSONObjectForKey(key, object)) {
                         this.setId(object.getInt(key));
                     }
-                } else if (key.equalsIgnoreCase("name")) {
+                } else if (key.equalsIgnoreCase("title")) {
                     if (AppFunctions.checkJSONObjectForKey(key, object)) {
-                        this.setName(object.getString(key));
+                        this.setTitle(object.getString(key));
                     }
                 }
             } catch (JSONException e) {
@@ -124,24 +161,32 @@ public class Career implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(name);
         dest.writeString(title);
-        dest.writeString(summary);
-        dest.writeString(body);
-        dest.writeString(author);
         dest.writeString(banner);
+        dest.writeString(author);
+        dest.writeString(attribute);
+        dest.writeString(gender);
+        dest.writeString(age);
+        dest.writeString(qualifications);
+        dest.writeTypedList(wage);
+        dest.writeTypedList(staff);
+        dest.writeString(published_date);
         dest.writeString(created_at);
         dest.writeString(updated_at);
     }
 
     protected Career(Parcel in) {
         id = in.readInt();
-        name = in.readString();
         title = in.readString();
-        summary = in.readString();
-        body = in.readString();
-        author = in.readString();
         banner = in.readString();
+        author = in.readString();
+        attribute = in.readString();
+        gender = in.readString();
+        age = in.readString();
+        qualifications = in.readString();
+        in.readTypedList(wage, Wage.CREATOR);
+        in.readTypedList(staff, Staff.CREATOR);
+        published_date = in.readString();
         created_at = in.readString();
         updated_at = in.readString();
     }
