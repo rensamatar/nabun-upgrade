@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by admin on 10/7/2015.
@@ -19,7 +20,7 @@ public class Event implements Parcelable {
     private String banner;
     private String author;
     private String body;
-    private ArrayList<Photos> photos;
+    private List<Photos> photos;
     private String published_date;
     private String created_at;
     private String updated_at;
@@ -66,7 +67,7 @@ public class Event implements Parcelable {
         this.body = body;
     }
 
-    public ArrayList<Photos> getPhotos() {
+    public List<Photos> getPhotos() {
         return photos;
     }
 

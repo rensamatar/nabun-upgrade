@@ -145,5 +145,5 @@ public class EventFragment extends Fragment {
         listEvent.add(ev);
         mAdapter.setEvent(listEvent);
     }
-    
+
 }

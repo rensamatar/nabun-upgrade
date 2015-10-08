@@ -77,13 +77,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         holder.title.setText(currentEvent.getTitle());
         holder.created_at.setText(currentEvent.getCreated_at());
-//        Date createdDate = currentEvent.getCreated_at();
-//        if (createdDate != null) {
-//            String formattedDate = mFormatter.format(createdDate);
-//            holder.created_at.setText(formattedDate);
-//        } else {
-//            holder.created_at.setText(Constants.NA);
-//        }
 
         // Retrieve image file
         String banner = currentEvent.getBanner();
@@ -125,8 +118,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
+            int position = getAdapterPosition();
+            final Event event = mEventList.get(position);
+            Toast.makeText(mContext, event.getPublished_date(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(mContext, EventViewActivity.class);
-            intent.putExtra("EVENT_DATA", "some data");
+            intent.putExtra(EventViewActivity.EVENT_DATA, event);
             mContext.startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         }
