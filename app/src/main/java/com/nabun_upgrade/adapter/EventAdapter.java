@@ -1,6 +1,9 @@
 package com.nabun_upgrade.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.nabun_upgrade.model.Event;
+import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import com.nabun_upgrade.utility.Constants;
 import com.nabun_upgrade.utility.VolleySingleton;
@@ -37,18 +41,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private ArrayList<Event> mEventList = new ArrayList<>();
     private ImageLoader mImageLoader;
     private VolleySingleton mVolleySingleton;
-    private DateFormat mFormatter = new SimpleDateFormat("yyyy-MM-dd");
     private Context mContext;
-
-    private static OnItemClickListener mOnItemClickListener;
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mOnItemClickListener = listener;
-    }
-
-    public static interface OnItemClickListener {
-        public void onItemClick(Event event);
-    }
+    private Activity activity;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -57,11 +51,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return viewHolder;
     }
 
-    public EventAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
-        mVolleySingleton = VolleySingleton.getInstance();
-        mImageLoader = mVolleySingleton.getImageLoader();
-        mContext = context;
+    public EventAdapter(Context context, Activity activity) {
+        this.mInflater = LayoutInflater.from(context);
+        this.mVolleySingleton = VolleySingleton.getInstance();
+        this.mImageLoader = mVolleySingleton.getImageLoader();
+        this.mContext = context;
+        this.activity = activity;
     }
 
     public void setEvent(ArrayList<Event> listEvent) {
@@ -112,13 +107,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         FrameLayout frameLayout;
         ImageView thumbnail;
         TextView title;
         TextView created_at;
-
-        private Event ev;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -127,14 +120,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             title = (TextView) itemView.findViewById(R.id.title);
             created_at = (TextView) itemView.findViewById(R.id.created_at);
 
-            frameLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(ev);
-                    }
-                }
-            });
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, EventViewActivity.class);
+            intent.putExtra("EVENT_DATA", "some data");
+            mContext.startActivity(intent);
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         }
     }
+
 }

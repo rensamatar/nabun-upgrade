@@ -50,7 +50,7 @@ public class EventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event, container, false);
-        mAdapter = new EventAdapter(getActivity());
+        mAdapter = new EventAdapter(getActivity(), getActivity());
 
         // RecyclerView
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -145,5 +145,5 @@ public class EventFragment extends Fragment {
         listEvent.add(ev);
         mAdapter.setEvent(listEvent);
     }
-
+    
 }

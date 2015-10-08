@@ -2,6 +2,7 @@ package com.nabun_upgrade.nabun;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -33,12 +34,11 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //do your own thing here
-                return true;
-            default: return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
         }
+        return super.onOptionsItemSelected(item);
     }
 
 }
