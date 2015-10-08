@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +19,8 @@ import com.nabun_upgrade.utility.VolleySingleton;
 
 import java.io.IOException;
 import java.net.URL;
+
+import me.grantland.widget.AutofitTextView;
 
 /**
  * Created by admin on 10/7/2015.
@@ -46,9 +49,8 @@ public class EventViewActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (toolbar != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(title);
 
@@ -58,8 +60,8 @@ public class EventViewActivity extends AppCompatActivity {
 
         TextView date = (TextView) findViewById(R.id.event_author);
         date.setText(author);
-        TextView body = (TextView) findViewById(R.id.event_body);
-        body.setText(body_text);
+        AutofitTextView body = (AutofitTextView) findViewById(R.id.event_body);
+        body.setText(Html.fromHtml(body_text).toString());
     }
 
     @Override

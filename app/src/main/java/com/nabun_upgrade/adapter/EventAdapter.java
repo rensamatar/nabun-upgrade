@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.bumptech.glide.Glide;
 import com.nabun_upgrade.model.Event;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
@@ -30,6 +31,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import me.grantland.widget.AutofitTextView;
 
 /**
  * Created by admin on 10/7/2015.
@@ -84,11 +87,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     }
 
-    private void loadImages(String banner, final ViewHolder holder) {
+    private void loadImages(final String banner, final ViewHolder holder) {
         if (!banner.equals(Constants.NA)) {
             mImageLoader.get(banner, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+                    Glide.with(mContext)
+                            .load(banner)
+                            .centerCrop()
+                            .placeholder(R.drawable.image)
+                            .crossFade()
+                            .into(holder.thumbnail);
                     holder.thumbnail.setImageBitmap(response.getBitmap());
                 }
 
@@ -103,14 +112,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         FrameLayout frameLayout;
         ImageView thumbnail;
-        TextView title;
+        AutofitTextView title;
         TextView created_at;
 
         public ViewHolder(View itemView) {
             super(itemView);
             frameLayout = (FrameLayout) itemView.findViewById(R.id.frame_layout);
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
-            title = (TextView) itemView.findViewById(R.id.title);
+            title = (AutofitTextView) itemView.findViewById(R.id.title);
             created_at = (TextView) itemView.findViewById(R.id.created_at);
 
             itemView.setOnClickListener(this);

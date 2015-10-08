@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.blunderer:materialdesignlibrary:2.0.4'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'me.grantland:autofittextview:0.1.+'
 }

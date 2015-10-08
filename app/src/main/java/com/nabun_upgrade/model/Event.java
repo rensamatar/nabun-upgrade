@@ -133,12 +133,13 @@ public class Event implements Parcelable {
     }
 
     public Event(Parcel in) {
+        this();
         id = in.readInt();
         title = in.readString();
         banner = in.readString();
         author = in.readString();
         body = in.readString();
-        in.readTypedList(photos, Photos.CREATOR);
+        //in.readTypedList(photos, Photos.CREATOR);
         published_date = in.readString();
         created_at = in.readString();
         updated_at = in.readString();

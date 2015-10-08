@@ -17,6 +17,8 @@ import com.nabun_upgrade.utility.VolleySingleton;
 
 import java.util.ArrayList;
 
+import me.grantland.widget.AutofitTextView;
+
 /**
  * Created by admin on 10/7/2015.
  */
@@ -89,13 +91,13 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail;
-        TextView title;
+        AutofitTextView title;
         TextView attribute;
 
         public ViewHolder(View itemView) {
             super(itemView);
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
-            title = (TextView) itemView.findViewById(R.id.title);
+            title = (AutofitTextView) itemView.findViewById(R.id.title);
             attribute = (TextView) itemView.findViewById(R.id.attribute);
         }
     }

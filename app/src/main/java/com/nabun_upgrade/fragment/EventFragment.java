@@ -73,6 +73,8 @@ public class EventFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                listEvent.clear();
+                listPhoto.clear();
                 mSwipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
