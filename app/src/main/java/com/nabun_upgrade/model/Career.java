@@ -184,8 +184,8 @@ public class Career implements Parcelable {
         gender = in.readString();
         age = in.readString();
         qualifications = in.readString();
-        in.readTypedList(wage, Wage.CREATOR);
-        in.readTypedList(staff, Staff.CREATOR);
+        //in.readTypedList(wage, Wage.CREATOR);
+        //in.readTypedList(staff, Staff.CREATOR);
         published_date = in.readString();
         created_at = in.readString();
         updated_at = in.readString();

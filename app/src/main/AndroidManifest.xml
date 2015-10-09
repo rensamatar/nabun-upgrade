@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity"
+        <activity android:name=".CareerViewActivity"
                   android:label="Nabun" />
         <activity android:name=".EventViewActivity"
                   android:label="Nabun" />

@@ -1,6 +1,8 @@
 package com.nabun_upgrade.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.nabun_upgrade.model.Career;
+import com.nabun_upgrade.nabun.CareerViewActivity;
+import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import com.nabun_upgrade.utility.Constants;
 import com.nabun_upgrade.utility.VolleySingleton;
@@ -29,6 +33,8 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
     private ArrayList<Career> mCareerList = new ArrayList<>();
     private ImageLoader mImageLoader;
     private VolleySingleton mVolleySingleton;
+    private Context mContext;
+    private Activity activity;
 
     @Override
     public CareerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,10 +43,12 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         return viewHolder;
     }
 
-    public CareerAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
-        mVolleySingleton = VolleySingleton.getInstance();
-        mImageLoader = mVolleySingleton.getImageLoader();
+    public CareerAdapter(Context context, Activity activity) {
+        this.mInflater = LayoutInflater.from(context);
+        this.mVolleySingleton = VolleySingleton.getInstance();
+        this.mImageLoader = mVolleySingleton.getImageLoader();
+        this.mContext = context;
+        this.activity = activity;
     }
 
     public void setCareer(ArrayList<Career> listCareer) {
@@ -89,7 +97,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView thumbnail;
         AutofitTextView title;
         TextView attribute;
@@ -99,6 +107,20 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
             title = (AutofitTextView) itemView.findViewById(R.id.title);
             attribute = (TextView) itemView.findViewById(R.id.attribute);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            int position = getAdapterPosition();
+            final Career career = mCareerList.get(position);
+            Intent intent = new Intent(mContext, CareerViewActivity.class);
+            intent.putExtra(CareerViewActivity.CAREER_DATA, career);
+            mContext.startActivity(intent);
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+
         }
     }
 }

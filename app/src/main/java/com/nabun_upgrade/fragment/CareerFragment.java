@@ -53,7 +53,7 @@ public class CareerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_career, container, false);
-        mAdapter = new CareerAdapter(getActivity());
+        mAdapter = new CareerAdapter(getActivity(), getActivity());
 
         // RecyclerView
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);

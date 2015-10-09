@@ -14,8 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.nabun_upgrade.nabun.BaseRefreshFragment;
-import com.nabun_upgrade.nabun.DetailActivity;
+import com.nabun_upgrade.nabun.CareerViewActivity;
 import com.nabun_upgrade.nabun.R;
 
 import java.util.ArrayList;
@@ -83,8 +82,8 @@ public class HomeFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                getActivity().startActivity(intent);
+                //Intent intent = new Intent(getActivity(), CareerViewActivity.class);
+                //getActivity().startActivity(intent);
             }
         });
 
