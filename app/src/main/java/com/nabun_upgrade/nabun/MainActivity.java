@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.nabun_upgrade.fragment.CareerFragment;
 import com.nabun_upgrade.fragment.EventFragment;
 import com.nabun_upgrade.fragment.HomeFragment;
+import com.nabun_upgrade.utility.CustomProgressDialog;
 
 public class MainActivity extends FragmentActivity {
 
@@ -25,7 +26,10 @@ public class MainActivity extends FragmentActivity {
     private ViewPager viewPager;
     private SectionPagerAdapter mSectionsPagerAdapter;
     private String tabTitles[] = new String[] { "ListView", "RecyclerView" };
-    private int[] iconId = {R.drawable.icon_1, R.drawable.icon_2, R.drawable.icon_3};
+    private int[] iconId = {
+            R.drawable.ic_terrain_white_48dp,
+            R.drawable.ic_local_play_white_48dp,
+            R.drawable.ic_layers_white_48dp };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,6 @@ public class MainActivity extends FragmentActivity {
         mSectionsPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {

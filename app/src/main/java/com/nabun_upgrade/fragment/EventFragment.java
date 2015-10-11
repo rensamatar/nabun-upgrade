@@ -1,6 +1,5 @@
 package com.nabun_upgrade.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +20,8 @@ import com.nabun_upgrade.model.Event;
 import com.nabun_upgrade.model.Photos;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
+import com.nabun_upgrade.utility.CustomProgressDialog;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,12 +86,17 @@ public class EventFragment extends Fragment {
             }
         });
 
+
+        final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
+        pDialog.setHeaderText("Loading...");
+        pDialog.show();
+
         return rootView;
     }
 
     private void initData() {
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
+        final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
+        pDialog.setHeaderText("Loading...");
         pDialog.show();
 
         request = new JsonArrayRequest(Application.EVENT, new Response.Listener<JSONArray>() {

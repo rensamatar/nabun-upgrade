@@ -1,6 +1,5 @@
 package com.nabun_upgrade.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +21,8 @@ import com.nabun_upgrade.model.Staff;
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
+import com.nabun_upgrade.utility.CustomProgressDialog;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,8 +91,8 @@ public class CareerFragment extends Fragment {
     }
 
     private void initData() {
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
+        final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
+        pDialog.setHeaderText("Loading...");
         pDialog.show();
 
         request = new JsonArrayRequest(Application.CAREER, new Response.Listener<JSONArray>() {

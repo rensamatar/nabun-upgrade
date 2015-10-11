@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" >
+
+    <item
+        android:drawable="@drawable/ic_flight_white_48dp"
+        android:duration="230"/>
+    <item
+        android:drawable="@drawable/ic_directions_subway_white_48dp"
+        android:duration="230"/>
+    <item
+        android:drawable="@drawable/ic_directions_bike_white_48dp"
+        android:duration="230"/>
+    <item
+        android:drawable="@drawable/ic_directions_boat_white_48dp"
+        android:duration="230"/>
+    <item
+        android:drawable="@drawable/ic_directions_bus_white_48dp"
+        android:duration="230"/>
+    <item
+        android:drawable="@drawable/ic_directions_walk_white_48dp"
+        android:duration="230"/>
+    <item
+        android:drawable="@drawable/ic_directions_run_white_48dp"
+        android:duration="230"/>
+
+</animation-list>
