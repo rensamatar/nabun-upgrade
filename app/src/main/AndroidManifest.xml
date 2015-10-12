@@ -23,6 +23,8 @@
                   android:label="Nabun" />
         <activity android:name=".EventViewActivity"
                   android:label="Nabun" />
+        <activity android:name="com.nabun_upgrade.utility.CustomSelectListView"
+                  android:label="Nabun" />
     </application>
 
 </manifest>

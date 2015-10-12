@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.nabun_upgrade.nabun.CareerViewActivity;
 import com.nabun_upgrade.nabun.R;
+import com.nabun_upgrade.utility.CustomSelectListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,8 +83,8 @@ public class HomeFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent = new Intent(getActivity(), CareerViewActivity.class);
-                //getActivity().startActivity(intent);
+                Intent intent = new Intent(getActivity(), CustomSelectListView.class);
+                getActivity().startActivity(intent);
             }
         });
 

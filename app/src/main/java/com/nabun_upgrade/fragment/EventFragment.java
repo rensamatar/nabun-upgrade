@@ -86,11 +86,6 @@ public class EventFragment extends Fragment {
             }
         });
 
-
-        final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
-        pDialog.setHeaderText("Loading...");
-        pDialog.show();
-
         return rootView;
     }
 

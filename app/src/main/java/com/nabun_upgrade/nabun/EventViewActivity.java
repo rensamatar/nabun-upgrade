@@ -69,7 +69,7 @@ public class EventViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
+                overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
                 return true;
             default: return super.onOptionsItemSelected(item);
         }

@@ -133,7 +133,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             Intent intent = new Intent(mContext, EventViewActivity.class);
             intent.putExtra(EventViewActivity.EVENT_DATA, event);
             mContext.startActivity(intent);
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+            activity.overridePendingTransition(R.anim.push_out_left, R.anim.pull_in_right);
         }
     }
 
