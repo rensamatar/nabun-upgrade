@@ -7,11 +7,16 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.nabun_upgrade.model.Career;
+import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.utility.VolleySingleton;
+
+import java.util.ArrayList;
 
 import me.grantland.widget.AutofitTextView;
 
@@ -25,9 +30,11 @@ public class CareerViewActivity extends AppCompatActivity {
     private String title;
     private String banner;
     private String attribute;
-    private String author;
     private String gender;
-
+    private String author;
+    private String age;
+    private String qualifications;
+    private ArrayList<Wage> wageList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,9 @@ public class CareerViewActivity extends AppCompatActivity {
             attribute = career.getAttribute();
             author = career.getAuthor();
             gender = career.getGender();
+            age = career.getAge();
+            qualifications = career.getQualifications();
+            wageList = career.getWage();
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -63,10 +73,16 @@ public class CareerViewActivity extends AppCompatActivity {
         AutofitTextView attr = (AutofitTextView) findViewById(R.id.career_attribute);
         attr.setText(attribute);
 
-        // listing
+        // Listing
         TextView gender_txt = (TextView) findViewById(R.id.gender);
         gender_txt.setText(gender);
+        TextView age_txt = (TextView) findViewById(R.id.age);
+        age_txt.setText(age);
+        TextView qualification_txt = (TextView) findViewById(R.id.qualifications);
+        qualification_txt.setText(qualifications);
 
+        ListView wageListView = (ListView) findViewById(R.id.wage_listview);
+        
     }
 
     @Override
