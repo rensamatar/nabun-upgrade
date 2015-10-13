@@ -57,8 +57,6 @@ public class EventFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Init json data
-        initData();
         recyclerView.setAdapter(mAdapter);
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +69,17 @@ public class EventFragment extends Fragment {
         // Swipe refresh
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.sienna, R.color.saffron, R.color.eggplant);
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                initData();
+            }
+        });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mAdapter.notifyDataSetChanged();
                 listEvent.clear();
                 listPhoto.clear();
                 mSwipeRefreshLayout.postDelayed(new Runnable() {
@@ -147,6 +153,7 @@ public class EventFragment extends Fragment {
         ev.setUpdated_at(object.optString("updated_at"));
         listEvent.add(ev);
         mAdapter.setEvent(listEvent);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
 }

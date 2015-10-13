@@ -74,8 +74,14 @@ public class CareerViewActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+            overridePendingTransition(R.anim.activity_open_scal, R.anim.activity_close_translate);
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.activity_open_scal, R.anim.activity_close_translate);
+    }
 }

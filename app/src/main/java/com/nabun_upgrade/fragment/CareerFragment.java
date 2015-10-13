@@ -60,8 +60,6 @@ public class CareerFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Init json data
-        initData();
         recyclerView.setAdapter(mAdapter);
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +72,21 @@ public class CareerFragment extends Fragment {
         // Swipe refresh
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.sienna, R.color.saffron, R.color.eggplant);
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                initData();
+            }
+        });
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mAdapter.notifyDataSetChanged();
+                listEvent.clear();
+                listWage.clear();
+                listStaff.clear();
                 mSwipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -172,6 +182,7 @@ public class CareerFragment extends Fragment {
         career.setUpdated_at(object.optString("updated_at"));
         listEvent.add(career);
         mAdapter.setCareer(listEvent);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
 }

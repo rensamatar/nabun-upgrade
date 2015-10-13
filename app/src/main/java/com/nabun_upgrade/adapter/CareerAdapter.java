@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +38,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
     private VolleySingleton mVolleySingleton;
     private Context mContext;
     private Activity activity;
+    private int lastPosition = -1;
 
     @Override
     public CareerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -68,17 +72,12 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
         holder.title.setText(currentItem.getTitle());
         holder.attribute.setText(currentItem.getAttribute());
-//        Date createdDate = currentItem.getCreated_at();
-//        if (createdDate != null) {
-//            String formattedDate = mFormatter.format(createdDate);
-//            holder.created_at.setText(formattedDate);
-//        } else {
-//            holder.created_at.setText(Constants.NA);
-//        }
 
         // Retrieve image file
         String banner = currentItem.getBanner();
         loadImages(banner, holder);
+
+        setAnimation(holder.frameLayout, position);
     }
 
     private void loadImages(String banner, final ViewHolder holder) {
@@ -97,13 +96,25 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         }
     }
 
+    private void setAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        FrameLayout frameLayout;
         ImageView thumbnail;
         AutofitTextView title;
         TextView attribute;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            frameLayout = (FrameLayout) itemView.findViewById(R.id.frame_layout);
             thumbnail = (ImageView) itemView.findViewById(R.id.background);
             title = (AutofitTextView) itemView.findViewById(R.id.title);
             attribute = (TextView) itemView.findViewById(R.id.attribute);
@@ -119,7 +130,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
             Intent intent = new Intent(mContext, CareerViewActivity.class);
             intent.putExtra(CareerViewActivity.CAREER_DATA, career);
             mContext.startActivity(intent);
-            activity.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+            activity.overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scal);
 
         }
     }

@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/loading_background"
         android:layout_width="100dp"
         android:layout_gravity="center"
         android:orientation="vertical"

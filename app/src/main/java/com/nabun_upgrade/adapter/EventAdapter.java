@@ -107,12 +107,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             mImageLoader.get(banner, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    Glide.with(mContext)
-                            .load(banner)
-                            .centerCrop()
-                            .placeholder(R.drawable.image)
-                            .crossFade()
-                            .into(holder.thumbnail);
                     holder.thumbnail.setImageBitmap(response.getBitmap());
                 }
 
@@ -144,7 +138,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         public void onClick(View v) {
             int position = getAdapterPosition();
             final Event event = mEventList.get(position);
-            Toast.makeText(mContext, event.getPublished_date(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(mContext, EventViewActivity.class);
             intent.putExtra(EventViewActivity.EVENT_DATA, event);
             mContext.startActivity(intent);
