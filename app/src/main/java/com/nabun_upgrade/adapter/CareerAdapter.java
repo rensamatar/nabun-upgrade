@@ -119,7 +119,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
             Intent intent = new Intent(mContext, CareerViewActivity.class);
             intent.putExtra(CareerViewActivity.CAREER_DATA, career);
             mContext.startActivity(intent);
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+            activity.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
         }
     }

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -46,6 +48,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private VolleySingleton mVolleySingleton;
     private Context mContext;
     private Activity activity;
+    private int lastPosition = -1;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -85,6 +88,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         String banner = currentEvent.getBanner();
         loadImages(banner, holder);
 
+        setAnimation(holder.frameLayout, position);
+
+    }
+
+    private void setAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     private void loadImages(final String banner, final ViewHolder holder) {
@@ -133,7 +148,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             Intent intent = new Intent(mContext, EventViewActivity.class);
             intent.putExtra(EventViewActivity.EVENT_DATA, event);
             mContext.startActivity(intent);
-            activity.overridePendingTransition(R.anim.push_out_left, R.anim.pull_in_right);
+            activity.overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scal);
         }
     }
 
