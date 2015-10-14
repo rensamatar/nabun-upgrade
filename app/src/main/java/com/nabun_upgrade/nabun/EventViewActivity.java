@@ -55,7 +55,6 @@ public class EventViewActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(title);
 
         NetworkImageView nv = (NetworkImageView) findViewById(R.id.event_banner);
-        nv.setDefaultImageResId(R.drawable.image);
         nv.setImageUrl(banner, VolleySingleton.getInstance().getImageLoader());
 
         TextView date = (TextView) findViewById(R.id.event_author);

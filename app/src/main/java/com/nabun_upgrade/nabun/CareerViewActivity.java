@@ -67,7 +67,6 @@ public class CareerViewActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(title);
 
         NetworkImageView nv = (NetworkImageView) findViewById(R.id.career_banner);
-        nv.setDefaultImageResId(R.drawable.image);
         nv.setImageUrl(banner, VolleySingleton.getInstance().getImageLoader());
 
         AutofitTextView attr = (AutofitTextView) findViewById(R.id.career_attribute);

@@ -15,6 +15,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:contentScrim="?attr/colorPrimary"
+      android:elevation="4dp"
       app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
       <com.android.volley.toolbox.NetworkImageView
