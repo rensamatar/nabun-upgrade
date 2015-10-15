@@ -1,7 +1,6 @@
 <android.support.design.widget.CoordinatorLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
@@ -46,13 +45,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
+      android:id="@+id/detail_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
-      android:paddingBottom="10dp"
-      android:paddingTop="20dp">
+      android:paddingBottom="@dimen/dimens_10dp"
+      android:paddingLeft="@dimen/dimens_10dp"
+      android:paddingRight="@dimen/dimens_10dp"
+      android:paddingTop="@dimen/dimens_20dp">
 
       <me.grantland.widget.AutofitTextView
         android:id="@+id/career_attribute"
@@ -64,10 +64,10 @@
       <include layout="@layout/separate_gray"/>
 
       <me.grantland.widget.AutofitTextView
-        android:layout_marginTop="10dp"
         android:id="@+id/detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Listing"
         android:textSize="@dimen/material_text_subhead"/>
@@ -81,19 +81,18 @@
         android:orientation="horizontal">
         <TextView
           android:layout_width="0dp"
-          android:layout_weight="1"
           android:layout_height="wrap_content"
-          android:text="Gender"
+          android:layout_weight="1"
           android:gravity="left"
-          android:textSize="@dimen/material_text_subhead"
-          />
+          android:text="Gender"
+          android:textSize="@dimen/material_text_subhead"/>
         <TextView
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="wrap_content"
-          android:gravity="right"
           android:id="@+id/gender"
-          />
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:textSize="@dimen/material_text_subhead"/>
       </LinearLayout>
       <include layout="@layout/separate_gray"/>
       <LinearLayout
@@ -104,19 +103,18 @@
         android:orientation="horizontal">
         <TextView
           android:layout_width="0dp"
-          android:layout_weight="1"
           android:layout_height="wrap_content"
-          android:text="Age"
+          android:layout_weight="1"
           android:gravity="left"
-          android:textSize="@dimen/material_text_subhead"
-          />
+          android:text="Age"
+          android:textSize="@dimen/material_text_subhead" />
         <TextView
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="wrap_content"
-          android:gravity="right"
           android:id="@+id/age"
-          />
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:textSize="@dimen/material_text_subhead"/>
       </LinearLayout>
       <include layout="@layout/separate_gray"/>
       <LinearLayout
@@ -127,24 +125,32 @@
         android:orientation="horizontal">
         <TextView
           android:layout_width="0dp"
-          android:layout_weight="1"
           android:layout_height="wrap_content"
-          android:text="Qualifications"
+          android:layout_weight="1"
           android:gravity="left"
-          android:textSize="@dimen/material_text_subhead"
-          />
+          android:text="Qualifications"
+          android:textSize="@dimen/material_text_subhead"/>
         <TextView
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="wrap_content"
-          android:gravity="right"
           android:id="@+id/qualifications"
-          />
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:textSize="@dimen/material_text_subhead"/>
       </LinearLayout>
       <include layout="@layout/separate_gray"/>
 
+      <me.grantland.widget.AutofitTextView
+        android:id="@+id/wage_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Details"
+        android:textSize="@dimen/material_text_subhead"/>
+
       <ListView
-        android:id="@+id/wage_listview"
+        android:id="@+id/listview_wage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
@@ -152,8 +158,11 @@
         android:scrollbars="none"
         android:fadingEdge="none"/>
 
+      <include layout="@layout/separate_gray"/>
+
     </LinearLayout>
 
   </android.support.v4.widget.NestedScrollView>
 
+  <include layout="@layout/bottom_panel"/>
 </android.support.design.widget.CoordinatorLayout>

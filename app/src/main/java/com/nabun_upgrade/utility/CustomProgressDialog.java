@@ -18,23 +18,7 @@ import com.nabun_upgrade.nabun.R;
  */
 public class CustomProgressDialog extends ProgressDialog {
 
-    private String headerText = null;
     private AnimationDrawable animation = null;
-
-    public String getHeader() {
-        if (headerText == null) {
-            return "Loading...";
-        }
-        return headerText;
-    }
-
-    public void setHeaderText(String headerText) {
-        this.headerText = headerText;
-    }
-
-    public CustomProgressDialog(Context context, int theme) {
-        super(context, theme);
-    }
 
     public CustomProgressDialog(Context context) {
         super(context);
@@ -59,11 +43,6 @@ public class CustomProgressDialog extends ProgressDialog {
     }
 
     private void initComponents() {
-        TextView dialogTitle = (TextView) findViewById(R.id.dialogTitle);
-        if (headerText != null) {
-            dialogTitle.setText(headerText);
-        }
-
         ImageView imgProgress = (ImageView) findViewById(R.id.imgProgress);
         animation = (AnimationDrawable) imgProgress.getDrawable();
         animation.start();

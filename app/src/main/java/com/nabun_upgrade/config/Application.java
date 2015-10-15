@@ -15,7 +15,9 @@ public class Application extends android.app.Application {
     public static final String TAG = Application.class.getSimpleName();
     public static final String BASE_URL = "http://nabun-upgrade.com/api/";
     public static final String EVENT = BASE_URL + "event";
-    public static final String CAREER = BASE_URL + "career";
+    public static final String CAREER = "http://www.json-generator.com/api/json/get/ccVztGYCCq?indent=2";
+    public static final String CAREER_DETAIL = BASE_URL + "career/view/";
+    public static final String DUMMY = "http://www.json-generator.com/api/json/get/bNXmimonfS?indent=2";
     private static Application mInstance;
     private RequestQueue mRequestQueue;
 

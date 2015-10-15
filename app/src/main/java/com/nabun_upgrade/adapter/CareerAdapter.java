@@ -12,10 +12,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.nabun_upgrade.model.Career;
+import com.nabun_upgrade.model.FeedCareer;
 import com.nabun_upgrade.nabun.CareerViewActivity;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
@@ -33,7 +35,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
     private LayoutInflater mInflater;
     private ViewHolder viewHolder;
-    private ArrayList<Career> mCareerList = new ArrayList<>();
+    private ArrayList<FeedCareer> mCareerList = new ArrayList<>();
     private ImageLoader mImageLoader;
     private VolleySingleton mVolleySingleton;
     private Context mContext;
@@ -55,7 +57,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         this.activity = activity;
     }
 
-    public void setCareer(ArrayList<Career> listCareer) {
+    public void setCareer(ArrayList<FeedCareer> listCareer) {
         this.mCareerList = listCareer;
         //update the adapter to reflect the new set of event
         notifyDataSetChanged();
@@ -68,7 +70,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Career currentItem = mCareerList.get(position);
+        FeedCareer currentItem = mCareerList.get(position);
 
         holder.title.setText(currentItem.getTitle());
         holder.attribute.setText(currentItem.getAttribute());
@@ -100,7 +102,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition)
         {
-            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.up_from_bottom);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
@@ -126,10 +128,11 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         public void onClick(View v) {
 
             int position = getAdapterPosition();
-            final Career career = mCareerList.get(position);
+            final FeedCareer career = mCareerList.get(position);
             Intent intent = new Intent(mContext, CareerViewActivity.class);
-            intent.putExtra(CareerViewActivity.CAREER_DATA, career);
+            intent.putExtra(CareerViewActivity.CAREER_DATA, career.getId());
             mContext.startActivity(intent);
+            //Toast.makeText(mContext, career.getTitle(), Toast.LENGTH_SHORT).show();
             activity.overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scal);
 
         }

@@ -1,26 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/dimens_20dp"
+              android:orientation="vertical">
+  <include layout="@layout/separate_gray"/>
   <TextView
-    android:id="@+id/published"
+    android:id="@+id/wage_title_1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/sienna"
-    android:text="Title"
-    android:gravity="center"
-    android:textSize="@dimen/material_text_subhead"/>
-  <RelativeLayout
-    android:layout_margin="5dp"
-    android:layout_width="match_parent"
-    android:layout_height="0.5sp"
-    android:background="@color/colorPrimaryDark"/>
-  <TextView
     android:layout_marginTop="10dp"
-    android:id="@+id/event_body"
-    android:text="Description"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="@dimen/material_text_body1"/>
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_6"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_7"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_weight="1"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_9"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_11"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_12"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_13"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_14"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_15"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+  <TextView
+    android:id="@+id/wage_title_16"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="left"
+    android:textSize="@dimen/material_text_subhead"/>
+  <include layout="@layout/separate_gray"/>
+
 </LinearLayout>

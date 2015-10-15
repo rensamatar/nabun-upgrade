@@ -11,47 +11,49 @@ import android.widget.TextView;
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.nabun.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by admin on 10/13/2015.
  */
 public class WageAdapter extends ArrayAdapter<Wage> {
 
     private LayoutInflater mInflater;
-    private ArrayAdapter<Wage> wageAdapter;
+    private ArrayList<Wage> wageList = new ArrayList<>();
 
-    public WageAdapter(Context context, int resource, ArrayAdapter<Wage> mWage) {
-        super(context, resource);
+    public WageAdapter(Context context, ArrayList<Wage> allWage) {
+        super(context, 0, allWage);
         mInflater = LayoutInflater.from(context);
-        wageAdapter = mWage;
+        wageList = allWage;
     }
+
+    public void setWage(ArrayList<Wage> listWage) {
+        this.wageList = listWage;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder viewHolder;
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.home_list_item, parent, false);
-            viewHolder.imageViewIcon = (ImageView) convertView.findViewById(R.id.image_icon);
-            viewHolder.titleView = (TextView) convertView.findViewById(R.id.title);
-            viewHolder.summaryView = (TextView) convertView.findViewById(R.id.summary);
+        ViewHolder holder = new ViewHolder();
 
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+        if (convertView == null || convertView.getTag() == null) {
+            convertView = mInflater.inflate(R.layout.wage_list_item, parent, false);
+            holder.wageTitle = (TextView) convertView.findViewById(R.id.wage_title);
+            convertView.setTag(holder);
         }
 
-//        viewHolder.imageViewIcon.setImageResource(mData.get(position).get(KEY_ICON));
-//        convertView.setBackgroundResource(mData.get(position).get(KEY_COLOR));
-//        viewHolder.titleView.setText(mData.get(position).get(KEY_TITLE));
-//        viewHolder.summaryView.setText(mData.get(position).get(KEY_SUMMARY));
+        final Wage currentWage = wageList.get(position);
+        if (currentWage != null) {
+            holder = (ViewHolder) convertView.getTag();
+            holder.wageTitle.setText(currentWage.getTitle());
+        }
 
         return convertView;
     }
 
     class ViewHolder {
-        ImageView imageViewIcon;
-        TextView titleView;
-        TextView summaryView;
+        TextView wageTitle;
     }
 
 }

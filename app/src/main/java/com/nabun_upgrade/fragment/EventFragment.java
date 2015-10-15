@@ -97,7 +97,6 @@ public class EventFragment extends Fragment {
 
     private void initData() {
         final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
-        pDialog.setHeaderText("Loading...");
         pDialog.show();
 
         request = new JsonArrayRequest(Application.EVENT, new Response.Listener<JSONArray>() {

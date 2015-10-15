@@ -13,7 +13,7 @@ import java.util.Iterator;
  * Created by admin on 9/29/2015.
  */
 public class Career implements Parcelable {
-    private int id;
+    private String id;
     private String title;
     private String banner;
     private String author;
@@ -29,11 +29,11 @@ public class Career implements Parcelable {
 
     public Career() {}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -140,9 +140,13 @@ public class Career implements Parcelable {
                 String key = dataIter.next();
                 if (key.equalsIgnoreCase("id")) {
                     if (AppFunctions.checkJSONObjectForKey(key, object)) {
-                        this.setId(object.getInt(key));
+                        this.setId(object.getString(key));
                     }
                 } else if (key.equalsIgnoreCase("title")) {
+                    if (AppFunctions.checkJSONObjectForKey(key, object)) {
+                        this.setTitle(object.getString(key));
+                    }
+                } else if (key.equalsIgnoreCase("attribute")) {
                     if (AppFunctions.checkJSONObjectForKey(key, object)) {
                         this.setTitle(object.getString(key));
                     }
@@ -160,7 +164,7 @@ public class Career implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(title);
         dest.writeString(banner);
         dest.writeString(author);
@@ -175,8 +179,8 @@ public class Career implements Parcelable {
         dest.writeString(updated_at);
     }
 
-    protected Career(Parcel in) {
-        id = in.readInt();
+    public Career(Parcel in) {
+        id = in.readString();
         title = in.readString();
         banner = in.readString();
         author = in.readString();
@@ -184,8 +188,10 @@ public class Career implements Parcelable {
         gender = in.readString();
         age = in.readString();
         qualifications = in.readString();
-        //in.readTypedList(wage, Wage.CREATOR);
-        //in.readTypedList(staff, Staff.CREATOR);
+        in.createTypedArrayList(Wage.CREATOR);
+        in.createTypedArrayList(Staff.CREATOR);
+//        in.readTypedList(wage, Wage.CREATOR);
+//        in.readTypedList(staff, Staff.CREATOR);
         published_date = in.readString();
         created_at = in.readString();
         updated_at = in.readString();
