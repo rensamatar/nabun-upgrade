@@ -1,7 +1,9 @@
 package com.nabun_upgrade.nabun;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -53,6 +55,7 @@ public class CareerViewActivity extends AppCompatActivity {
     private WageAdapter wageAdapter;
 
     private CollapsingToolbarLayout collapsingToolbar;
+    private FloatingActionButton fab;
     private NetworkImageView thumbnail;
     private TextView attrText;
     private TextView genderText;
@@ -87,6 +90,14 @@ public class CareerViewActivity extends AppCompatActivity {
 
     private void initComponentData() {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
+        int lightVibrantColor = getResources().getColor(android.R.color.white);
+        int vibrantColor = (getResources().getColor(R.color.sienna));
+
+        fab = (FloatingActionButton) findViewById(R.id.contactBtn);
+        fab.setRippleColor(lightVibrantColor);
+        fab.setBackgroundTintList(ColorStateList.valueOf(vibrantColor));
+
         thumbnail = (NetworkImageView) findViewById(R.id.career_banner);
 
         // Listing
