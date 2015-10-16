@@ -19,6 +19,7 @@ import com.nabun_upgrade.nabun.R;
 public class CustomProgressDialog extends ProgressDialog {
 
     private AnimationDrawable animation = null;
+    private ImageView imgProgress;
 
     public CustomProgressDialog(Context context) {
         super(context);
@@ -43,7 +44,8 @@ public class CustomProgressDialog extends ProgressDialog {
     }
 
     private void initComponents() {
-        ImageView imgProgress = (ImageView) findViewById(R.id.imgProgress);
+        imgProgress = (ImageView) findViewById(R.id.imgProgress);
+        imgProgress.setColorFilter(Color.parseColor("#EB6460"));
         animation = (AnimationDrawable) imgProgress.getDrawable();
         animation.start();
     }

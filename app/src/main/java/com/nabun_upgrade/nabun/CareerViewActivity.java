@@ -52,7 +52,6 @@ public class CareerViewActivity extends AppCompatActivity {
     private WageAdapter wageAdapter;
 
     private CollapsingToolbarLayout collapsingToolbar;
-    private NestedScrollView scrollView;
     private NetworkImageView thumbnail;
     private AutofitTextView attrText;
     private TextView genderText;
@@ -81,12 +80,11 @@ public class CareerViewActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
     }
 
     private void initComponentData() {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        scrollView = (NestedScrollView) findViewById(R.id.career_scrollview);
-        scrollView.setNestedScrollingEnabled(true);
         thumbnail = (NetworkImageView) findViewById(R.id.career_banner);
         attrText = (AutofitTextView) findViewById(R.id.career_attribute);
 
