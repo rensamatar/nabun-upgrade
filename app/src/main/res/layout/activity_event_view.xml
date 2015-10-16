@@ -62,7 +62,7 @@
         android:gravity="center"
         android:textSize="@dimen/material_text_subhead"/>
 
-      <include layout="@layout/separate_gray"/>
+      <include layout="@layout/divider"/>
 
       <me.grantland.widget.AutofitTextView
         android:layout_marginTop="10dp"

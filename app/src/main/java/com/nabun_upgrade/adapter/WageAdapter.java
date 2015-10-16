@@ -32,7 +32,6 @@ public class WageAdapter extends ArrayAdapter<Wage> {
         notifyDataSetChanged();
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = new ViewHolder();

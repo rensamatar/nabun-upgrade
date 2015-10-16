@@ -4,7 +4,7 @@
               android:layout_height="wrap_content"
               android:layout_marginBottom="@dimen/dimens_20dp"
               android:orientation="vertical">
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_1"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_2"
     android:layout_width="match_parent"
@@ -20,7 +20,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_3"
     android:layout_width="match_parent"
@@ -28,7 +28,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_4"
     android:layout_width="match_parent"
@@ -36,7 +36,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_5"
     android:layout_width="match_parent"
@@ -44,7 +44,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_6"
     android:layout_width="match_parent"
@@ -52,7 +52,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_7"
     android:layout_width="match_parent"
@@ -60,7 +60,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_8"
     android:layout_width="match_parent"
@@ -69,7 +69,7 @@
     android:layout_weight="1"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_9"
     android:layout_width="match_parent"
@@ -77,7 +77,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_10"
     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_11"
     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_12"
     android:layout_width="match_parent"
@@ -101,7 +101,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_13"
     android:layout_width="match_parent"
@@ -109,7 +109,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_14"
     android:layout_width="match_parent"
@@ -117,7 +117,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_15"
     android:layout_width="match_parent"
@@ -125,7 +125,7 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
   <TextView
     android:id="@+id/wage_title_16"
     android:layout_width="match_parent"
@@ -133,6 +133,6 @@
     android:layout_marginTop="10dp"
     android:gravity="left"
     android:textSize="@dimen/material_text_subhead"/>
-  <include layout="@layout/separate_gray"/>
+  <include layout="@layout/divider"/>
 
 </LinearLayout>

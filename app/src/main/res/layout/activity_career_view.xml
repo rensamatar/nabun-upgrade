@@ -39,9 +39,13 @@
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.widget.NestedScrollView
+    android:id="@+id/career_scrollview"
+    android:layout_marginBottom="50dp"
+    android:paddingBottom="50dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:layout_gravity="fill_vertical"
+    android:nestedScrollingEnabled="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -61,7 +65,7 @@
         android:gravity="center"
         android:textSize="@dimen/material_text_subhead"/>
 
-      <include layout="@layout/separate_gray"/>
+      <include layout="@layout/divider"/>
 
       <me.grantland.widget.AutofitTextView
         android:id="@+id/detail_title"
@@ -72,7 +76,7 @@
         android:text="Listing"
         android:textSize="@dimen/material_text_subhead"/>
 
-      <include layout="@layout/separate_gray"/>
+      <include layout="@layout/divider"/>
       <LinearLayout
         android:id="@+id/list_gender"
         android:layout_width="match_parent"
@@ -94,7 +98,7 @@
           android:gravity="right"
           android:textSize="@dimen/material_text_subhead"/>
       </LinearLayout>
-      <include layout="@layout/separate_gray"/>
+      <include layout="@layout/divider"/>
       <LinearLayout
         android:id="@+id/list_age"
         android:layout_width="match_parent"
@@ -116,7 +120,7 @@
           android:gravity="right"
           android:textSize="@dimen/material_text_subhead"/>
       </LinearLayout>
-      <include layout="@layout/separate_gray"/>
+      <include layout="@layout/divider"/>
       <LinearLayout
         android:id="@+id/list_qualifications"
         android:layout_width="match_parent"
@@ -138,7 +142,7 @@
           android:gravity="right"
           android:textSize="@dimen/material_text_subhead"/>
       </LinearLayout>
-      <include layout="@layout/separate_gray"/>
+      <include layout="@layout/divider"/>
 
       <me.grantland.widget.AutofitTextView
         android:id="@+id/wage_detail_title"
@@ -152,13 +156,11 @@
       <ListView
         android:id="@+id/listview_wage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:divider="@null"
         android:dividerHeight="0dp"
         android:scrollbars="none"
         android:fadingEdge="none"/>
-
-      <include layout="@layout/separate_gray"/>
 
     </LinearLayout>
 

@@ -28,6 +28,10 @@ public class Wage implements Parcelable {
         dest.writeString(title);
     }
 
+    public Wage(String title) {
+        this.title = "Holy moly";
+    }
+
     public Wage(Parcel in) {
         title = in.readString();
     }

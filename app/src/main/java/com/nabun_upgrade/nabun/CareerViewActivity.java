@@ -2,11 +2,14 @@ package com.nabun_upgrade.nabun;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +52,7 @@ public class CareerViewActivity extends AppCompatActivity {
     private WageAdapter wageAdapter;
 
     private CollapsingToolbarLayout collapsingToolbar;
+    private NestedScrollView scrollView;
     private NetworkImageView thumbnail;
     private AutofitTextView attrText;
     private TextView genderText;
@@ -81,6 +85,8 @@ public class CareerViewActivity extends AppCompatActivity {
 
     private void initComponentData() {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        scrollView = (NestedScrollView) findViewById(R.id.career_scrollview);
+        scrollView.setNestedScrollingEnabled(true);
         thumbnail = (NetworkImageView) findViewById(R.id.career_banner);
         attrText = (AutofitTextView) findViewById(R.id.career_attribute);
 
@@ -91,6 +97,14 @@ public class CareerViewActivity extends AppCompatActivity {
 
         // Wage
         wageListView = (ListView) findViewById(R.id.listview_wage);
+//        for (int i = 0; i < 10; i++) {
+//            Wage test = new Wage();
+//            test.setTitle("Test title");
+//            wageList.add(test);
+//        }
+
+        wageAdapter = new WageAdapter(this, wageList);
+        wageListView.setAdapter(wageAdapter);
     }
 
     private void initData() {
@@ -114,11 +128,9 @@ public class CareerViewActivity extends AppCompatActivity {
                        Wage wage = new Wage();
                        wage.setTitle(data.optString("title"));
                        wageList.add(wage);
-                       Log.d(Application.TAG, "Wage size : "+wageList.size());
-                       wageAdapter.setWage(wageList);
                    }
-                   wageListView.setAdapter(wageAdapter);
-                   wageListView.deferNotifyDataSetChanged();
+                   wageAdapter.setWage(wageList);
+                   setListViewHeightBasedOnChildren(wageListView);
                } catch (Exception e) {
                    e.printStackTrace();
                }
@@ -132,6 +144,32 @@ public class CareerViewActivity extends AppCompatActivity {
             }
         });
         Application.getInstance().addToRequestQueue(request, REQ_CAREER_BY_ID);
+    }
+
+    private void setListViewAdapter(ArrayList<Wage> allWage) {
+        Log.d(Application.TAG, "wageList : " + wageList.size());
+        Log.d(Application.TAG, "Wage Adapter size : " + wageAdapter.getCount());
+        //wageAdapter = new WageAdapter(this, allWage);
+        //wageListView.setAdapter(wageAdapter);
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 
     private void setDataFromJson(JSONObject object) {
