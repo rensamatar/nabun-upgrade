@@ -23,6 +23,7 @@ import com.nabun_upgrade.config.Application;
 import com.nabun_upgrade.model.Career;
 import com.nabun_upgrade.model.Staff;
 import com.nabun_upgrade.model.Wage;
+import com.nabun_upgrade.utility.AppFunctions;
 import com.nabun_upgrade.utility.CustomProgressDialog;
 import com.nabun_upgrade.utility.VolleySingleton;
 
@@ -53,10 +54,11 @@ public class CareerViewActivity extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private NetworkImageView thumbnail;
-    private AutofitTextView attrText;
+    private TextView attrText;
     private TextView genderText;
     private TextView ageText;
     private TextView qualificationText;
+    private TextView published_date;
     private ListView wageListView;
 
     @Override
@@ -86,20 +88,17 @@ public class CareerViewActivity extends AppCompatActivity {
     private void initComponentData() {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         thumbnail = (NetworkImageView) findViewById(R.id.career_banner);
-        attrText = (AutofitTextView) findViewById(R.id.career_attribute);
 
         // Listing
+        attrText = (TextView) findViewById(R.id.attribute);
         genderText = (TextView) findViewById(R.id.gender);
         ageText = (TextView) findViewById(R.id.age);
         qualificationText = (TextView) findViewById(R.id.qualifications);
+        published_date = (TextView) findViewById(R.id.published_date);
 
         // Wage
         wageListView = (ListView) findViewById(R.id.listview_wage);
-//        for (int i = 0; i < 10; i++) {
-//            Wage test = new Wage();
-//            test.setTitle("Test title");
-//            wageList.add(test);
-//        }
+        wageListView.setEnabled(false);
 
         wageAdapter = new WageAdapter(this, wageList);
         wageListView.setAdapter(wageAdapter);
@@ -120,6 +119,7 @@ public class CareerViewActivity extends AppCompatActivity {
                    genderText.setText(object.optString("gender"));
                    ageText.setText(object.optString("age"));
                    qualificationText.setText(object.optString("qualifications"));
+                   published_date.setText(object.optString("published_date"));
                    JSONArray wr = object.getJSONArray("wage");
                    for (int i = 0; i < wr.length(); i++) {
                        JSONObject data = wr.getJSONObject(i);
@@ -128,7 +128,17 @@ public class CareerViewActivity extends AppCompatActivity {
                        wageList.add(wage);
                    }
                    wageAdapter.setWage(wageList);
-                   setListViewHeightBasedOnChildren(wageListView);
+                   AppFunctions.setListViewHeightBasedOnChildren(wageListView);
+
+                   JSONArray array = object.getJSONArray("staff");
+                   for (int i = 0; i < array.length(); i++) {
+                       JSONObject ob = array.getJSONObject(i);
+                       Staff staff = new Staff();
+                       staff.setId(ob.optString("id"));
+                       staff.setNickname(ob.optString("nickname"));
+                       staff.setPhone(ob.optString("phone"));
+                       staffList.add(staff);
+                   }
                } catch (Exception e) {
                    e.printStackTrace();
                }
@@ -142,32 +152,6 @@ public class CareerViewActivity extends AppCompatActivity {
             }
         });
         Application.getInstance().addToRequestQueue(request, REQ_CAREER_BY_ID);
-    }
-
-    private void setListViewAdapter(ArrayList<Wage> allWage) {
-        Log.d(Application.TAG, "wageList : " + wageList.size());
-        Log.d(Application.TAG, "Wage Adapter size : " + wageAdapter.getCount());
-        //wageAdapter = new WageAdapter(this, allWage);
-        //wageListView.setAdapter(wageAdapter);
-    }
-
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
     }
 
     private void setDataFromJson(JSONObject object) {
@@ -188,7 +172,6 @@ public class CareerViewActivity extends AppCompatActivity {
                 wageList.add(wage);
                 wageAdapter.setWage(wageList);
             }
-
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -6,45 +6,39 @@
 
   <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="@dimen/cover_item_height"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
     <android.support.design.widget.CollapsingToolbarLayout
       android:id="@+id/collapsing_toolbar"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:contentScrim="?attr/colorPrimary"
       app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
       <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/career_banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:layout_collapseMode="parallax"/>
-
       <View
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient"/>
-
       <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin"/>
-
     </android.support.design.widget.CollapsingToolbarLayout>
-
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.widget.NestedScrollView
     android:id="@+id/career_scrollview"
-    android:layout_marginBottom="50dp"
-    android:paddingBottom="50dp"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="fill_vertical"
+    android:layout_marginBottom="@dimen/dimens_50dp"
+    android:paddingBottom="@dimen/dimens_50dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -52,118 +46,99 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:paddingBottom="@dimen/dimens_10dp"
+      android:paddingBottom="@dimen/dimens_20dp"
       android:paddingLeft="@dimen/dimens_10dp"
       android:paddingRight="@dimen/dimens_10dp"
       android:paddingTop="@dimen/dimens_20dp">
 
       <me.grantland.widget.AutofitTextView
-        android:id="@+id/career_attribute"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/material_text_subhead"/>
-
-      <include layout="@layout/divider"/>
-
-      <me.grantland.widget.AutofitTextView
         android:id="@+id/detail_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Listing"
-        android:textSize="@dimen/material_text_subhead"/>
+        style="@style/DetailTitle"
+        android:text="@string/title_detail"/>
 
       <include layout="@layout/divider"/>
+      <LinearLayout
+        android:id="@+id/list_attribute"
+        style="@style/DetailListItem">
+        <TextView
+          style="@style/DetailListItemTitle"
+          android:text="@string/title_attribute"/>
+        <TextView
+          android:id="@+id/attribute"
+          style="@style/DetailListItemValue"/>
+      </LinearLayout>
+      <include layout="@layout/divider"/>
+
       <LinearLayout
         android:id="@+id/list_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        style="@style/DetailListItem">
         <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="left"
-          android:text="Gender"
-          android:textSize="@dimen/material_text_subhead"/>
+          style="@style/DetailListItemTitle"
+          android:text="@string/title_gender"/>
         <TextView
           android:id="@+id/gender"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="right"
-          android:textSize="@dimen/material_text_subhead"/>
+          style="@style/DetailListItemValue"/>
       </LinearLayout>
       <include layout="@layout/divider"/>
+
       <LinearLayout
         android:id="@+id/list_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        style="@style/DetailListItem">
         <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="left"
-          android:text="Age"
-          android:textSize="@dimen/material_text_subhead" />
+          style="@style/DetailListItemTitle"
+          android:text="@string/title_age"/>
         <TextView
           android:id="@+id/age"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="right"
-          android:textSize="@dimen/material_text_subhead"/>
+          style="@style/DetailListItemValue"/>
       </LinearLayout>
       <include layout="@layout/divider"/>
+
       <LinearLayout
         android:id="@+id/list_qualifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        style="@style/DetailListItem">
         <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="left"
-          android:text="Qualifications"
-          android:textSize="@dimen/material_text_subhead"/>
+          style="@style/DetailListItemTitle"
+          android:text="@string/title_qualifications"/>
         <TextView
           android:id="@+id/qualifications"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="right"
-          android:textSize="@dimen/material_text_subhead"/>
+          style="@style/DetailListItemValue"/>
+      </LinearLayout>
+      <include layout="@layout/divider"/>
+
+      <LinearLayout
+        android:id="@+id/list_published_date"
+        style="@style/DetailListItem">
+        <TextView
+          style="@style/DetailListItemTitle"
+          android:text="@string/title_published_date"/>
+        <TextView
+          android:id="@+id/published_date"
+          style="@style/DetailListItemValue"/>
       </LinearLayout>
       <include layout="@layout/divider"/>
 
       <me.grantland.widget.AutofitTextView
         android:id="@+id/wage_detail_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Details"
-        android:textSize="@dimen/material_text_subhead"/>
+        style="@style/DetailTitle"
+        android:text="@string/title_wage"/>
+
+      <include layout="@layout/divider"/>
 
       <ListView
         android:id="@+id/listview_wage"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:scrollbars="none"
-        android:fadingEdge="none"/>
+        android:divider="@color/gray"
+        android:dividerHeight="0.8sp"
+        android:fadingEdge="none"
+        android:scrollbars="none"/>
 
+      <include layout="@layout/divider"/>
+      
     </LinearLayout>
 
   </android.support.v4.widget.NestedScrollView>
 
   <include layout="@layout/bottom_panel"/>
+
 </android.support.design.widget.CoordinatorLayout>
