@@ -7,7 +7,7 @@
 
   <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="@dimen/cover_item_height"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <android.support.design.widget.CollapsingToolbarLayout
@@ -15,7 +15,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:contentScrim="?attr/colorPrimary"
-      android:elevation="4dp"
+      app:expandedTitleMarginStart="20dp"
       app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
       <com.android.volley.toolbox.NetworkImageView
@@ -45,34 +45,51 @@
     android:layout_height="match_parent"
     android:layout_gravity="fill_vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <LinearLayout
+    <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
-      android:paddingBottom="10dp"
-      android:paddingTop="20dp">
+      android:layout_height="wrap_content">
 
-      <TextView
-        android:id="@+id/event_author"
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/material_text_subhead"/>
+        android:orientation="vertical">
 
-      <include layout="@layout/divider"/>
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="200dp">
 
-      <me.grantland.widget.AutofitTextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/event_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/material_text_body1"/>
+          <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_default"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-    </LinearLayout>
+          <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator_default"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"/>
+        </RelativeLayout>
 
+        <me.grantland.widget.AutofitTextView
+          android:id="@+id/event_author"
+          style="@style/DetailTitle"/>
+
+        <include layout="@layout/divider"/>
+
+        <me.grantland.widget.AutofitTextView
+          android:paddingBottom="@dimen/dimens_20dp"
+          android:paddingLeft="@dimen/dimens_10dp"
+          android:paddingRight="@dimen/dimens_10dp"
+          android:paddingTop="@dimen/dimens_20dp"
+          android:id="@+id/event_body"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textSize="@dimen/material_text_body1"/>
+
+      </LinearLayout>
+    </FrameLayout>
   </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

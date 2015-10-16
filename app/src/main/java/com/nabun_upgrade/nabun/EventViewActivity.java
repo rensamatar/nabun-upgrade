@@ -1,26 +1,21 @@
 package com.nabun_upgrade.nabun;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.nabun_upgrade.adapter.DemoPageAdapter;
 import com.nabun_upgrade.model.Event;
 import com.nabun_upgrade.utility.VolleySingleton;
 
-import java.io.IOException;
-import java.net.URL;
-
 import me.grantland.widget.AutofitTextView;
+import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by admin on 10/7/2015.
@@ -57,10 +52,17 @@ public class EventViewActivity extends AppCompatActivity {
         NetworkImageView nv = (NetworkImageView) findViewById(R.id.event_banner);
         nv.setImageUrl(banner, VolleySingleton.getInstance().getImageLoader());
 
-        TextView date = (TextView) findViewById(R.id.event_author);
+        AutofitTextView date = (AutofitTextView) findViewById(R.id.event_author);
         date.setText(author);
         AutofitTextView body = (AutofitTextView) findViewById(R.id.event_body);
         body.setText(Html.fromHtml(body_text).toString());
+
+        // DEFAULT
+        ViewPager defaultViewpager = (ViewPager) findViewById(R.id.viewpager_default);
+        CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);
+        DemoPageAdapter defaultPagerAdapter = new DemoPageAdapter(getSupportFragmentManager());
+        defaultViewpager.setAdapter(defaultPagerAdapter);
+        defaultIndicator.setViewPager(defaultViewpager);
     }
 
     @Override
