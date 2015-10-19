@@ -12,14 +12,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.nabun_upgrade.model.Career;
 import com.nabun_upgrade.model.FeedCareer;
 import com.nabun_upgrade.nabun.CareerViewActivity;
-import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import com.nabun_upgrade.utility.Constants;
 import com.nabun_upgrade.utility.VolleySingleton;
@@ -100,8 +97,7 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
     private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
+        if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.up_from_bottom);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;

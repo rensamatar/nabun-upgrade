@@ -8,79 +8,52 @@ import android.os.Parcelable;
  */
 public class Photos implements Parcelable {
 
-    private String img_01;
-    private String img_02;
-    private String img_03;
-    private String img_04;
-    private String img_05;
-    private String img_06;
-    private String img_07;
-    private String img_08;
+    private String id;
+    private String photo;
+    private String description;
+    private String created_at;
+    private String updated_at;
 
     public Photos() {}
 
-    public void setImg_01(String img_01) {
-        this.img_01 = img_01;
+    public String getId() {
+        return id;
     }
 
-    public void setImg_02(String img_02) {
-        this.img_02 = img_02;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setImg_03(String img_03) {
-        this.img_03 = img_03;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setImg_04(String img_04) {
-        this.img_04 = img_04;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public void setImg_05(String img_05) {
-        this.img_05 = img_05;
+    public String getDescription() {
+        return description;
     }
 
-    public void setImg_06(String img_06) {
-        this.img_06 = img_06;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setImg_07(String img_07) {
-        this.img_07 = img_07;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setImg_08(String img_08) {
-        this.img_08 = img_08;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public String getImg_01() {
-        return img_01;
+    public String getUpdated_at() {
+        return updated_at;
     }
 
-    public String getImg_02() {
-        return img_02;
-    }
-
-    public String getImg_03() {
-        return img_03;
-    }
-
-    public String getImg_04() {
-        return img_04;
-    }
-
-    public String getImg_05() {
-        return img_05;
-    }
-
-    public String getImg_06() {
-        return img_06;
-    }
-
-    public String getImg_07() {
-        return img_07;
-    }
-
-    public String getImg_08() {
-        return img_08;
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     @Override
@@ -90,25 +63,19 @@ public class Photos implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(img_01);
-        dest.writeString(img_02);
-        dest.writeString(img_03);
-        dest.writeString(img_04);
-        dest.writeString(img_05);
-        dest.writeString(img_06);
-        dest.writeString(img_07);
-        dest.writeString(img_08);
+        dest.writeString(id);
+        dest.writeString(photo);
+        dest.writeString(description);
+        dest.writeString(created_at);
+        dest.writeString(updated_at);
     }
 
     public Photos(Parcel in) {
-        img_01 = in.readString();
-        img_02 = in.readString();
-        img_03 = in.readString();
-        img_04 = in.readString();
-        img_05 = in.readString();
-        img_06 = in.readString();
-        img_07 = in.readString();
-        img_08 = in.readString();
+        id = in.readString();
+        photo = in.readString();
+        description = in.readString();
+        created_at = in.readString();
+        updated_at = in.readString();
     }
 
     public static final Creator<Photos> CREATOR = new Creator<Photos>() {

@@ -44,6 +44,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="fill_vertical"
+    android:layout_marginBottom="@dimen/dimens_50dp"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/dimens_50dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <FrameLayout
       android:layout_width="match_parent"
@@ -61,34 +64,28 @@
         <include layout="@layout/divider"/>
 
         <me.grantland.widget.AutofitTextView
-          android:paddingBottom="@dimen/dimens_20dp"
-          android:paddingLeft="@dimen/dimens_10dp"
-          android:paddingRight="@dimen/dimens_10dp"
           android:id="@+id/event_body"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
+          android:paddingBottom="@dimen/dimens_20dp"
+          android:paddingLeft="@dimen/dimens_10dp"
+          android:paddingRight="@dimen/dimens_10dp"
           android:textSize="@dimen/material_text_body1"/>
 
-        <RelativeLayout
+        <ListView
+          android:id="@+id/listView"
           android:layout_width="match_parent"
-          android:layout_height="200dp">
-
-          <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager_default"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-          <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/indicator_default"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"/>
-        </RelativeLayout>
+          android:layout_height="wrap_content"
+          android:divider="@null"
+          android:dividerHeight="@null"
+          android:fadingEdge="none"
+          android:paddingBottom="@dimen/dimens_50dp"
+          android:scrollbars="none"/>
 
       </LinearLayout>
     </FrameLayout>
   </android.support.v4.widget.NestedScrollView>
+  <include layout="@layout/bottom_panel"/>
 
 </android.support.design.widget.CoordinatorLayout>
