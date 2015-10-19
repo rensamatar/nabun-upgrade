@@ -4,17 +4,13 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -23,20 +19,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.nabun_upgrade.adapter.WageAdapter;
 import com.nabun_upgrade.config.Application;
-import com.nabun_upgrade.model.Career;
 import com.nabun_upgrade.model.Staff;
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.utility.AppFunctions;
 import com.nabun_upgrade.utility.CustomProgressDialog;
 import com.nabun_upgrade.utility.VolleySingleton;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import me.grantland.widget.AutofitTextView;
 
 /**
  * Created by admin on 9/30/2015.
@@ -50,10 +40,7 @@ public class CareerViewActivity extends AppCompatActivity {
     private JsonObjectRequest requestObject;
     private JsonArrayRequest requestArray;
     private CustomProgressDialog pDialog;
-    private String url;
     private String careerId;
-    private Career career = null;
-    private ArrayList<Career> allCareer = new ArrayList<>();
     private ArrayList<Wage> wageList = new ArrayList<>();
     private ArrayList<Staff> staffList = new ArrayList<>();
     private WageAdapter wageAdapter;
@@ -74,7 +61,6 @@ public class CareerViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_career_view);
         pDialog = new CustomProgressDialog(this);
         careerId = getIntent().getStringExtra(CAREER_DATA);
-        Toast.makeText(this, "Holy : " + careerId, Toast.LENGTH_LONG).show();
 
         initComponentData();
 
@@ -121,8 +107,7 @@ public class CareerViewActivity extends AppCompatActivity {
 
     private void initData() {
         pDialog.show();
-        url = Application.CAREER + careerId;
-        requestObject = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+        requestObject = new JsonObjectRequest(Application.CAREER + careerId, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject object) {
                 Log.d(Application.TAG, object.toString());
