@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.nabun_upgrade.adapter.EventAdapter;
 import com.nabun_upgrade.config.Application;
 import com.nabun_upgrade.model.Event;
+import com.nabun_upgrade.model.FeedEvent;
 import com.nabun_upgrade.model.Photos;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
@@ -35,7 +36,7 @@ public class EventFragment extends Fragment {
     private static final String REQ_EVENT = "request_event";
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView recyclerView;
-    private ArrayList<Event> listEvent = new ArrayList<>();
+    private ArrayList<FeedEvent> listEvent = new ArrayList<>();
     private ArrayList<Photos> listPhoto = new ArrayList<>();
     private EventAdapter mAdapter;
 
@@ -124,32 +125,10 @@ public class EventFragment extends Fragment {
     }
 
     private void setDataFromJson(JSONObject object) {
-        Event ev = new Event();
-        ev.setId(object.optInt("id"));
+        FeedEvent ev = new FeedEvent();
+        ev.setId(object.optString("id"));
         ev.setTitle(object.optString("title"));
         ev.setBanner(object.optString("banner"));
-        ev.setAuthor(object.optString("author"));
-        ev.setBody(object.optString("body"));
-        try {
-            JSONObject obj = object.getJSONObject("photos");
-            for (int i = 0; i < obj.length(); i++) {
-                Photos photo = new Photos();
-                photo.setImg_01(obj.optString("img_01"));
-                photo.setImg_02(obj.optString("img_02"));
-                photo.setImg_03(obj.optString("img_03"));
-                photo.setImg_04(obj.optString("img_04"));
-                photo.setImg_05(obj.optString("img_05"));
-                photo.setImg_06(obj.optString("img_06"));
-                photo.setImg_07(obj.optString("img_07"));
-                photo.setImg_08(obj.optString("img_08"));
-                listPhoto.add(photo);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        ev.setPublished_date(object.optString("published_date"));
-        ev.setCreated_at(object.optString("created_at"));
-        ev.setUpdated_at(object.optString("updated_at"));
         listEvent.add(ev);
         mAdapter.setEvent(listEvent);
         mSwipeRefreshLayout.setRefreshing(false);

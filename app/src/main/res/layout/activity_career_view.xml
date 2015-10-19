@@ -141,9 +141,8 @@
           android:divider="@color/gray"
           android:dividerHeight="0.8sp"
           android:fadingEdge="none"
-          android:scrollbars="none"/>
-
-        <include layout="@layout/divider"/>
+          android:scrollbars="none"
+          android:paddingBottom="@dimen/dimens_50dp"/>
 
       </LinearLayout>
 

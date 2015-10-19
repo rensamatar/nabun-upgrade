@@ -137,8 +137,6 @@ public class CareerFragment extends Fragment {
         career.setBanner(object.optString("banner"));
         career.setAttribute(object.optString("attribute"));
         listCareer.add(career);
-
-        // set to adapter
         mAdapter.setCareer(listCareer);
         mSwipeRefreshLayout.setRefreshing(false);
     }

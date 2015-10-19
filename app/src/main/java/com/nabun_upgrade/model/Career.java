@@ -172,7 +172,6 @@ public class Career implements Parcelable {
         dest.writeString(gender);
         dest.writeString(age);
         dest.writeString(qualifications);
-        dest.writeTypedList(wage);
         dest.writeTypedList(staff);
         dest.writeString(published_date);
         dest.writeString(created_at);
@@ -188,7 +187,6 @@ public class Career implements Parcelable {
         gender = in.readString();
         age = in.readString();
         qualifications = in.readString();
-        in.createTypedArrayList(Wage.CREATOR);
         in.createTypedArrayList(Staff.CREATOR);
 //        in.readTypedList(wage, Wage.CREATOR);
 //        in.readTypedList(staff, Staff.CREATOR);

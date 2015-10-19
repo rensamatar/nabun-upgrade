@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.nabun_upgrade.adapter.WageAdapter;
@@ -44,7 +45,10 @@ public class CareerViewActivity extends AppCompatActivity {
 
     public static final String CAREER_DATA = "career_data";
     private static final String REQ_CAREER_BY_ID = "request_career_by_id";
-    private JsonObjectRequest request;
+    private static final String REQ_CAREER_WAGE  = "request_career_wage";
+    private static final String REQ_CAREER_STAFF  = "request_career_staff";
+    private JsonObjectRequest requestObject;
+    private JsonArrayRequest requestArray;
     private CustomProgressDialog pDialog;
     private String url;
     private String careerId;
@@ -117,13 +121,12 @@ public class CareerViewActivity extends AppCompatActivity {
 
     private void initData() {
         pDialog.show();
-        url = Application.CAREER_DETAIL + careerId;
-        request = new JsonObjectRequest(Application.DUMMY, null, new Response.Listener<JSONObject>() {
+        url = Application.CAREER + careerId;
+        requestObject = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject object) {
                 Log.d(Application.TAG, object.toString());
                try {
-                   //setDataFromJson(object);
                    collapsingToolbar.setTitle(object.optString("title"));
                    thumbnail.setImageUrl(object.optString("banner"), VolleySingleton.getInstance().getImageLoader());
                    attrText.setText(object.optString("attribute"));
@@ -131,25 +134,6 @@ public class CareerViewActivity extends AppCompatActivity {
                    ageText.setText(object.optString("age"));
                    qualificationText.setText(object.optString("qualifications"));
                    published_date.setText(object.optString("published_date"));
-                   JSONArray wr = object.getJSONArray("wage");
-                   for (int i = 0; i < wr.length(); i++) {
-                       JSONObject data = wr.getJSONObject(i);
-                       Wage wage = new Wage();
-                       wage.setTitle(data.optString("title"));
-                       wageList.add(wage);
-                   }
-                   wageAdapter.setWage(wageList);
-                   AppFunctions.setListViewHeightBasedOnChildren(wageListView);
-
-                   JSONArray array = object.getJSONArray("staff");
-                   for (int i = 0; i < array.length(); i++) {
-                       JSONObject ob = array.getJSONObject(i);
-                       Staff staff = new Staff();
-                       staff.setId(ob.optString("id"));
-                       staff.setNickname(ob.optString("nickname"));
-                       staff.setPhone(ob.optString("phone"));
-                       staffList.add(staff);
-                   }
                } catch (Exception e) {
                    e.printStackTrace();
                }
@@ -162,50 +146,63 @@ public class CareerViewActivity extends AppCompatActivity {
                 pDialog.hide();
             }
         });
-        Application.getInstance().addToRequestQueue(request, REQ_CAREER_BY_ID);
-    }
+        Application.getInstance().addToRequestQueue(requestObject, REQ_CAREER_BY_ID);
 
-    private void setDataFromJson(JSONObject object) {
-        career.setId(object.optString("id"));
-        career.setTitle(object.optString("title"));
-        career.setBanner(object.optString("banner"));
-        career.setAuthor(object.optString("author"));
-        career.setAttribute(object.optString("attribute"));
-        career.setGender(object.optString("gender"));
-        career.setAge(object.optString("age"));
-        career.setQualifications(object.optString("qualifications"));
-        try {
-            JSONArray wr = object.getJSONArray("wage");
-            for (int i = 0; i < wr.length(); i++) {
-                JSONObject data = wr.getJSONObject(i);
-                Wage wage = new Wage();
-                wage.setTitle(data.optString("title"));
-                wageList.add(wage);
-                wageAdapter.setWage(wageList);
+        // get Wage
+        requestArray = new JsonArrayRequest(Application.CAREER_WAGE + careerId, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d(Application.TAG, response.toString());
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Wage wage = new Wage();
+                        wage.setTitle(obj.optString("title"));
+                        wageList.add(wage);
+                    }
+                    wageAdapter.notifyDataSetChanged();
+                    AppFunctions.setListViewHeightBasedOnChildren(wageListView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                pDialog.hide();
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(Application.TAG, "Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        });
+        Application.getInstance().addToRequestQueue(requestArray, REQ_CAREER_WAGE);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            JSONArray array = object.getJSONArray("staff");
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject ob = array.getJSONObject(i);
-                Staff staff = new Staff();
-                staff.setId(ob.optString("id"));
-                staff.setNickname(ob.optString("nickname"));
-                staff.setPhone(ob.optString("phone"));
-                staffList.add(staff);
+        // get Staff
+        requestArray = new JsonArrayRequest(Application.CAREER_STAFF + careerId, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d(Application.TAG, response.toString());
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Staff staff = new Staff();
+                        staff.setId(obj.optString("id"));
+                        staff.setNickname(obj.optString("nickname"));
+                        staff.setPhone(obj.optString("phone"));
+                        staffList.add(staff);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                pDialog.hide();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        career.setWage(wageList);
-        career.setStaff(staffList);
-        career.setPublished_date(object.optString("published_date"));
-        career.setCreated_at(object.optString("created_at"));
-        career.setUpdated_at(object.optString("updated_at"));
-        allCareer.add(career);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(Application.TAG, "Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        });
+        Application.getInstance().addToRequestQueue(requestArray, REQ_CAREER_STAFF);
     }
 
     @Override

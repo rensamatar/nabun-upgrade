@@ -54,6 +54,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <me.grantland.widget.AutofitTextView
+          android:id="@+id/event_author"
+          style="@style/DetailTitle"/>
+
+        <include layout="@layout/divider"/>
+
+        <me.grantland.widget.AutofitTextView
+          android:paddingBottom="@dimen/dimens_20dp"
+          android:paddingLeft="@dimen/dimens_10dp"
+          android:paddingRight="@dimen/dimens_10dp"
+          android:id="@+id/event_body"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textSize="@dimen/material_text_body1"/>
+
         <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="200dp">
@@ -70,23 +86,6 @@
             android:layout_width="fill_parent"
             android:layout_height="40dp"/>
         </RelativeLayout>
-
-        <me.grantland.widget.AutofitTextView
-          android:id="@+id/event_author"
-          style="@style/DetailTitle"/>
-
-        <include layout="@layout/divider"/>
-
-        <me.grantland.widget.AutofitTextView
-          android:paddingBottom="@dimen/dimens_20dp"
-          android:paddingLeft="@dimen/dimens_10dp"
-          android:paddingRight="@dimen/dimens_10dp"
-          android:paddingTop="@dimen/dimens_20dp"
-          android:id="@+id/event_body"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="10dp"
-          android:textSize="@dimen/material_text_body1"/>
 
       </LinearLayout>
     </FrameLayout>

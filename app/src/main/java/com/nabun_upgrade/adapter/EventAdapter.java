@@ -3,36 +3,23 @@ package com.nabun_upgrade.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.bumptech.glide.Glide;
-import com.nabun_upgrade.model.Event;
+import com.nabun_upgrade.model.FeedEvent;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import com.nabun_upgrade.utility.Constants;
 import com.nabun_upgrade.utility.VolleySingleton;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import me.grantland.widget.AutofitTextView;
 
@@ -43,7 +30,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     private LayoutInflater mInflater;
     private ViewHolder viewHolder;
-    private ArrayList<Event> mEventList = new ArrayList<>();
+    private ArrayList<FeedEvent> mEventList = new ArrayList<>();
     private ImageLoader mImageLoader;
     private VolleySingleton mVolleySingleton;
     private Context mContext;
@@ -65,7 +52,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         this.activity = activity;
     }
 
-    public void setEvent(ArrayList<Event> listEvent) {
+    public void setEvent(ArrayList<FeedEvent> listEvent) {
         this.mEventList = listEvent;
         //update the adapter to reflect the new set of event
         notifyDataSetChanged();
@@ -79,10 +66,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        final Event currentEvent = mEventList.get(position);
+        final FeedEvent currentEvent = mEventList.get(position);
 
         holder.title.setText(currentEvent.getTitle());
-        holder.created_at.setText(currentEvent.getCreated_at());
+        //holder.created_at.setText(currentEvent.getCreated_at());
 
         // Retrieve image file
         String banner = currentEvent.getBanner();
@@ -137,9 +124,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            final Event event = mEventList.get(position);
+            final FeedEvent event = mEventList.get(position);
             Intent intent = new Intent(mContext, EventViewActivity.class);
-            intent.putExtra(EventViewActivity.EVENT_DATA, event);
+            intent.putExtra(EventViewActivity.EVENT_DATA, event.getId());
             mContext.startActivity(intent);
             activity.overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scal);
         }
