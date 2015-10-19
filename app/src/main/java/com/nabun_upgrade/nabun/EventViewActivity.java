@@ -1,11 +1,14 @@
 package com.nabun_upgrade.nabun;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.Response;
@@ -73,8 +76,16 @@ public class EventViewActivity extends AppCompatActivity {
         // Photos
         photoAdapter = new PhotoAdapter(this, photosList);
         photoGridView = (ListView) findViewById(R.id.listView);
-        photoGridView.setEnabled(false);
         photoGridView.setAdapter(photoAdapter);
+        photoGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent =  new Intent(EventViewActivity.this, PhotoViewActivity.class);
+                intent.putExtra(PhotoViewActivity.EVENT_ID, eventId);
+                startActivity(intent);
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scal);
+            }
+        });
     }
 
     private void initData() {
@@ -132,28 +143,6 @@ public class EventViewActivity extends AppCompatActivity {
             }
         });
         Application.getInstance().addToRequestQueue(requestArray, REQ_EVENT_PHOTO);
-    }
-
-    private void setDataFromJson(JSONArray response) {
-        try {
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject obj = response.getJSONObject(i);
-                Photos photos = new Photos();
-                photos.setId(obj.optString("id"));
-                photos.setDescription(obj.optString("description"));
-                photos.setPhoto(obj.optString("photo"));
-                photosList.add(photos);
-            }
-            Log.d(Application.TAG, "photosList : " + photosList.size());
-
-            photosList = new ArrayList<>();
-            photoAdapter = new PhotoAdapter(this, photosList);
-            photoGridView.setAdapter(photoAdapter);
-
-            AppFunctions.setListViewHeightBasedOnChildren(photoGridView);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

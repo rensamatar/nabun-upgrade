@@ -25,6 +25,8 @@
                   android:label="Nabun" />
         <activity android:name="com.nabun_upgrade.utility.CustomSelectListView"
                   android:label="Nabun" />
+        <activity android:name=".PhotoViewActivity"
+                  android:label="Nabun" />
     </application>
 
 </manifest>
