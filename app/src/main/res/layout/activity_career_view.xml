@@ -137,7 +137,7 @@
         <ListView
           android:id="@+id/listview_wage"
           android:layout_width="match_parent"
-          android:layout_height="fill_parent"
+          android:layout_height="wrap_content"
           android:divider="@color/gray"
           android:dividerHeight="0.8sp"
           android:fadingEdge="none"

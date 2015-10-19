@@ -41,6 +41,7 @@ public class EventFragment extends Fragment {
     private EventAdapter mAdapter;
 
     private JsonArrayRequest request;
+    private CustomProgressDialog pDialog;
 
     public EventFragment() {}
 
@@ -52,6 +53,7 @@ public class EventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event, container, false);
+        pDialog = new CustomProgressDialog(getActivity());
         mAdapter = new EventAdapter(getActivity(), getActivity());
 
         // RecyclerView
@@ -74,6 +76,8 @@ public class EventFragment extends Fragment {
             @Override
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(true);
+                listPhoto.clear();
+                listEvent.clear();
                 initData();
             }
         });
@@ -97,9 +101,7 @@ public class EventFragment extends Fragment {
     }
 
     private void initData() {
-        final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
         pDialog.show();
-
         request = new JsonArrayRequest(Application.EVENT, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
