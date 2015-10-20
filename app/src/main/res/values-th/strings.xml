@@ -1,0 +1,25 @@
+<resources>
+  <string name="app_name">Nabun</string>
+
+  <string name="hello_world">สวัสดีชาวโลก!</string>
+  <string name="action_settings">ตั้งค่า</string>
+
+  <string name="home_about">About</string>
+  <string name="home_vision">Vision</string>
+  <string name="home_mission">Mission</string>
+
+  <string name="home_sub_about">Summary for About</string>
+  <string name="home_sub_vision">Summary for Vision</string>
+  <string name="home_sub_mission">Summary for Mission</string>
+
+  <!-- Detail page -->
+  <string name="title_detail">รายละเอียด</string>
+  <string name="title_wage">ค่าจ้างและสวัสดิการ</string>
+  <string name="title_contact">ติดต่อสอบถาม</string>
+  <string name="title_attribute">ลักษณะงาน</string>
+  <string name="title_gender">เพศ</string>
+  <string name="title_age">อายุ</string>
+  <string name="title_qualifications">คุณสมบัติ</string>
+  <string name="title_published_date">วันที่ประกาศ</string>
+
+</resources>
