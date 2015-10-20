@@ -1,10 +1,15 @@
 package com.nabun_upgrade.utility;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.nabun_upgrade.nabun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,6 +67,17 @@ public class AppFunctions {
         ViewGroup.LayoutParams params = gridView.getLayoutParams();
         params.height = totalHeight;
         gridView.setLayoutParams(params);
+    }
+
+    public static void setAnimation(Context context, View viewToAnimate, int position) {
+        int lastPosition = -1;
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.up_from_bottom);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     public static Date getDateFromString(String dateString) {

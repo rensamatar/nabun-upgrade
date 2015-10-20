@@ -10,24 +10,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.nabun_upgrade.adapter.CareerAdapter;
-import com.nabun_upgrade.adapter.WageAdapter;
 import com.nabun_upgrade.config.Application;
-import com.nabun_upgrade.model.Career;
 import com.nabun_upgrade.model.FeedCareer;
-import com.nabun_upgrade.model.Staff;
-import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.nabun.EventViewActivity;
 import com.nabun_upgrade.nabun.R;
 import com.nabun_upgrade.utility.CustomProgressDialog;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -37,14 +34,12 @@ import java.util.ArrayList;
 public class CareerFragment extends Fragment {
 
     private static final String REQ_CAREER = "request_career";
+    private JsonArrayRequest request;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView recyclerView;
     private ArrayList<FeedCareer> listCareer = new ArrayList<>();
-    private ArrayList<Wage> listWage = new ArrayList<>();
-    private ArrayList<Staff> listStaff = new ArrayList<>();
     private CareerAdapter mAdapter;
-
-    private JsonArrayRequest request;
+    private CustomProgressDialog pDialog;
 
     public CareerFragment() {}
 
@@ -56,12 +51,12 @@ public class CareerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_career, container, false);
+        pDialog = new CustomProgressDialog(getActivity());
         mAdapter = new CareerAdapter(getActivity(), getActivity());
 
         // RecyclerView
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         recyclerView.setAdapter(mAdapter);
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +80,7 @@ public class CareerFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mAdapter.notifyDataSetChanged();
-                listCareer.clear();
-                listWage.clear();
-                listStaff.clear();
+                clearData();
                 mSwipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -103,9 +95,7 @@ public class CareerFragment extends Fragment {
     }
 
     private void initData() {
-        final CustomProgressDialog pDialog = new CustomProgressDialog(getActivity());
         pDialog.show();
-
         request = new JsonArrayRequest(Application.CAREER, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -138,7 +128,13 @@ public class CareerFragment extends Fragment {
         career.setAttribute(object.optString("attribute"));
         listCareer.add(career);
         mAdapter.setCareer(listCareer);
+        mAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    private void clearData() {
+        listCareer.clear();
+        mAdapter.notifyDataSetChanged();
     }
 
 }

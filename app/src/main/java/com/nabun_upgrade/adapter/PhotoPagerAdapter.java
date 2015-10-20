@@ -57,7 +57,6 @@ public class PhotoPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = layoutInflater.inflate(R.layout.photo_view_pager_item, container, false);
-
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.activity_open_translate);
 
         final Photos data = mData.get(position);

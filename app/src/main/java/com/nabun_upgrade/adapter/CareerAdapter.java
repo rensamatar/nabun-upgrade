@@ -7,12 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.nabun_upgrade.model.FeedCareer;
@@ -37,7 +34,6 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
     private VolleySingleton mVolleySingleton;
     private Context mContext;
     private Activity activity;
-    private int lastPosition = -1;
 
     @Override
     public CareerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -75,8 +71,6 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         // Retrieve image file
         String banner = currentItem.getBanner();
         loadImages(banner, holder);
-
-        setAnimation(holder.frameLayout, position);
     }
 
     private void loadImages(String banner, final ViewHolder holder) {
@@ -92,15 +86,6 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
                 }
             });
-        }
-    }
-
-    private void setAnimation(View viewToAnimate, int position) {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.up_from_bottom);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
         }
     }
 
@@ -122,13 +107,11 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
-
             int position = getAdapterPosition();
             final FeedCareer career = mCareerList.get(position);
             Intent intent = new Intent(mContext, CareerViewActivity.class);
             intent.putExtra(CareerViewActivity.CAREER_DATA, career.getId());
             mContext.startActivity(intent);
-            //Toast.makeText(mContext, career.getTitle(), Toast.LENGTH_SHORT).show();
             activity.overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scal);
 
         }

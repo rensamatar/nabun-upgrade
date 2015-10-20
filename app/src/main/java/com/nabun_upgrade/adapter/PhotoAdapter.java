@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.nabun_upgrade.model.Photos;
@@ -41,6 +42,7 @@ public class PhotoAdapter extends ArrayAdapter {
         final Photos currentPhoto = mData.get(position);
         if (convertView == null || convertView.getTag() == null) {
             convertView = mInflater.inflate(R.layout.photo_list_item, parent, false);
+            holder.placeCard = (RelativeLayout) convertView.findViewById(R.id.placeCard);
             holder.photo = (ImageView) convertView.findViewById(R.id.photoItem);
             convertView.setTag(holder);
         }
@@ -69,5 +71,6 @@ public class PhotoAdapter extends ArrayAdapter {
 
     static class ViewHolder {
         ImageView photo;
+        RelativeLayout placeCard;
     }
 }

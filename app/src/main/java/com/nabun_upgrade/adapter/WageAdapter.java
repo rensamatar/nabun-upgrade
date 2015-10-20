@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.nabun.R;
 
@@ -25,11 +23,6 @@ public class WageAdapter extends ArrayAdapter<Wage> {
         super(context, 0, allWage);
         mInflater = LayoutInflater.from(context);
         wageList = allWage;
-    }
-
-    public void setWage(ArrayList<Wage> listWage) {
-        this.wageList = listWage;
-        notifyDataSetChanged();
     }
 
     @Override
