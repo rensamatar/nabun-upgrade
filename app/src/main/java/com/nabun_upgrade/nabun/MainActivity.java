@@ -27,9 +27,9 @@ public class MainActivity extends FragmentActivity {
     private SectionPagerAdapter mSectionsPagerAdapter;
     private String tabTitles[] = new String[] { "ListView", "RecyclerView" };
     private int[] iconId = {
-            R.drawable.ic_terrain_white_48dp,
-            R.drawable.ic_local_play_white_48dp,
-            R.drawable.ic_layers_white_48dp };
+            R.drawable.ic_heart,
+            R.drawable.ic_layers,
+            R.drawable.ic_linegraph };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class MainActivity extends FragmentActivity {
                 image = getResources().getDrawable(iconId[position]);
             }
             if (image != null) {
-                image.setBounds(0, 0, 50, 50);
+                image.setBounds(0, 0, 54, 54);
             }
             SpannableString sb = new SpannableString(" ");
             ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
