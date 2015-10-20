@@ -1,5 +1,7 @@
 package com.nabun_upgrade.nabun;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -17,12 +19,15 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.nabun_upgrade.adapter.StaffAdapter;
 import com.nabun_upgrade.adapter.WageAdapter;
 import com.nabun_upgrade.config.Application;
 import com.nabun_upgrade.model.Staff;
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.utility.AppFunctions;
+import com.nabun_upgrade.utility.CareerStaffDialog;
 import com.nabun_upgrade.utility.CustomProgressDialog;
+import com.nabun_upgrade.utility.CustomSelectListView;
 import com.nabun_upgrade.utility.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,13 +41,12 @@ public class CareerViewActivity extends AppCompatActivity {
     public static final String CAREER_DATA = "career_data";
     private static final String REQ_CAREER_BY_ID = "request_career_by_id";
     private static final String REQ_CAREER_WAGE  = "request_career_wage";
-    private static final String REQ_CAREER_STAFF  = "request_career_staff";
+
     private JsonObjectRequest requestObject;
     private JsonArrayRequest requestArray;
     private CustomProgressDialog pDialog;
     private String careerId;
     private ArrayList<Wage> wageList = new ArrayList<>();
-    private ArrayList<Staff> staffList = new ArrayList<>();
     private WageAdapter wageAdapter;
 
     private CollapsingToolbarLayout collapsingToolbar;
@@ -83,10 +87,20 @@ public class CareerViewActivity extends AppCompatActivity {
 
         int lightVibrantColor = getResources().getColor(android.R.color.white);
         int vibrantColor = (getResources().getColor(R.color.sienna));
+        // Dialog staff
 
+        // Floating Action Button
         fab = (FloatingActionButton) findViewById(R.id.contactBtn);
         fab.setRippleColor(lightVibrantColor);
         fab.setBackgroundTintList(ColorStateList.valueOf(vibrantColor));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CustomSelectListView.class);
+                intent.putExtra(CustomSelectListView.ID, careerId);
+                startActivity(intent);
+            }
+        });
 
         thumbnail = (NetworkImageView) findViewById(R.id.career_banner);
 
@@ -160,34 +174,6 @@ public class CareerViewActivity extends AppCompatActivity {
             }
         });
         Application.getInstance().addToRequestQueue(requestArray, REQ_CAREER_WAGE);
-
-        // get Staff
-        requestArray = new JsonArrayRequest(Application.CAREER_STAFF + careerId, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Log.d(Application.TAG, response.toString());
-                try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject obj = response.getJSONObject(i);
-                        Staff staff = new Staff();
-                        staff.setId(obj.optString("id"));
-                        staff.setNickname(obj.optString("nickname"));
-                        staff.setPhone(obj.optString("phone"));
-                        staffList.add(staff);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                pDialog.hide();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(Application.TAG, "Error: " + error.getMessage());
-                pDialog.hide();
-            }
-        });
-        Application.getInstance().addToRequestQueue(requestArray, REQ_CAREER_STAFF);
     }
 
     @Override
