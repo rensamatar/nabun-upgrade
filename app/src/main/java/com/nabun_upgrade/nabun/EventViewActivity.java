@@ -45,7 +45,7 @@ public class EventViewActivity extends AppCompatActivity {
     private String eventId;
     private CollapsingToolbarLayout collapsingToolbar;
     private NetworkImageView thumbnail;
-    private AutofitTextView author;
+    private AutofitTextView title;
     private AutofitTextView body;
     private ListView photoGridView;
     private ArrayList<Photos> photosList = new ArrayList<>();
@@ -70,7 +70,7 @@ public class EventViewActivity extends AppCompatActivity {
     private void initComponentData() {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         thumbnail = (NetworkImageView) findViewById(R.id.event_banner);
-        author = (AutofitTextView) findViewById(R.id.event_author);
+        title = (AutofitTextView) findViewById(R.id.event_title);
         body = (AutofitTextView) findViewById(R.id.event_body);
 
         // Photos
@@ -94,9 +94,9 @@ public class EventViewActivity extends AppCompatActivity {
             public void onResponse(JSONObject object) {
                 Log.d(Application.TAG, object.toString());
                 try {
-                    collapsingToolbar.setTitle(object.optString("title"));
+                    collapsingToolbar.setTitle(object.optString("published_date"));
                     thumbnail.setImageUrl(object.optString("banner"), VolleySingleton.getInstance().getImageLoader());
-                    author.setText(object.optString("author"));
+                    title.setText(object.optString("title"));
                     body.setText(object.optString("body"));
                     //published_date.setText(object.optString("published_date"));
                 } catch (Exception e) {

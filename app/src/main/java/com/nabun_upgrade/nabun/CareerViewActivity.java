@@ -1,6 +1,5 @@
 package com.nabun_upgrade.nabun;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -19,13 +18,10 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
-import com.nabun_upgrade.adapter.StaffAdapter;
 import com.nabun_upgrade.adapter.WageAdapter;
 import com.nabun_upgrade.config.Application;
-import com.nabun_upgrade.model.Staff;
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.utility.AppFunctions;
-import com.nabun_upgrade.utility.CareerStaffDialog;
 import com.nabun_upgrade.utility.CustomProgressDialog;
 import com.nabun_upgrade.utility.CustomSelectListView;
 import com.nabun_upgrade.utility.VolleySingleton;

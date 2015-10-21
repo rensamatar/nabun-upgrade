@@ -58,7 +58,7 @@
         android:orientation="vertical">
 
         <me.grantland.widget.AutofitTextView
-          android:id="@+id/event_author"
+          android:id="@+id/event_title"
           style="@style/DetailTitle"/>
 
         <include layout="@layout/divider"/>
