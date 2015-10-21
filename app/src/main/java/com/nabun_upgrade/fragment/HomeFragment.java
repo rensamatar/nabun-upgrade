@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         listView.setAdapter(new HomeAdapter(getActivity(), R.layout.home_list_item, mHomeList));
-        
+
         return rootView;
     }
 
