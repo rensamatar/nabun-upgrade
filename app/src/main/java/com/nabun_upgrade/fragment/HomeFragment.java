@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nabun_upgrade.nabun.AboutActivity;
 import com.nabun_upgrade.nabun.R;
 
 import java.util.ArrayList;
@@ -85,6 +86,13 @@ public class HomeFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         listView.setAdapter(new HomeAdapter(getActivity(), R.layout.home_list_item, mHomeList));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(), AboutActivity.class);
+                startActivity(i);
+            }
+        });
 
         return rootView;
     }

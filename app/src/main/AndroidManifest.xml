@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"
+                  android:label="Nabun" />
         <activity android:name=".CareerViewActivity"
                   android:label="Nabun" />
         <activity android:name=".EventViewActivity"
                   android:label="Nabun" />
         <activity android:name=".PhotoViewActivity"
                   android:label="Nabun" />
+      <activity android:name=".AboutActivity"
+                android:label="Nabun" />
     </application>
 
 </manifest>

@@ -3,6 +3,8 @@ package com.nabun_upgrade.nabun;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by admin on 10/19/2015.
  */
-public class PhotoViewActivity extends Activity {
+public class PhotoViewActivity extends AppCompatActivity {
 
     public static final String EVENT_ID = "event_id";
     public static final String REQ_EVENT_PHOTOS = "req_photos";

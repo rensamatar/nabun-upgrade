@@ -1,5 +1,6 @@
 package com.nabun_upgrade.nabun;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import com.nabun_upgrade.fragment.CareerFragment;
 import com.nabun_upgrade.fragment.EventFragment;
 import com.nabun_upgrade.fragment.HomeFragment;
+import com.nabun_upgrade.fragment.IntroFragment;
 import com.nabun_upgrade.utility.CustomProgressDialog;
 
 public class MainActivity extends FragmentActivity {
