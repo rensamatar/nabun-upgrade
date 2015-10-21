@@ -31,9 +31,9 @@
     android:layout_height="wrap_content"
     android:layout_weight="1">
     <ImageView
-      android:layout_width="@dimen/dimens_50dp"
-      android:layout_height="@dimen/dimens_50dp"
-      android:background="@drawable/icon_2"/>
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/ic_heart"/>
   </RelativeLayout>
 
 </LinearLayout>

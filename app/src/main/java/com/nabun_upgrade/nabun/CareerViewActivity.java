@@ -2,14 +2,17 @@ package com.nabun_upgrade.nabun;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.android.volley.Response;
@@ -18,12 +21,13 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.nabun_upgrade.adapter.StaffAdapter;
 import com.nabun_upgrade.adapter.WageAdapter;
 import com.nabun_upgrade.config.Application;
+import com.nabun_upgrade.model.Staff;
 import com.nabun_upgrade.model.Wage;
 import com.nabun_upgrade.utility.AppFunctions;
 import com.nabun_upgrade.utility.CustomProgressDialog;
-import com.nabun_upgrade.utility.CustomSelectListView;
 import com.nabun_upgrade.utility.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,16 +41,19 @@ public class CareerViewActivity extends AppCompatActivity {
     public static final String CAREER_DATA = "career_data";
     private static final String REQ_CAREER_BY_ID = "request_career_by_id";
     private static final String REQ_CAREER_WAGE  = "request_career_wage";
+    private static final String REQ_CAREER_STAFF  = "request_career_staff";
 
-    private JsonObjectRequest requestObject;
-    private JsonArrayRequest requestArray;
+    JsonObjectRequest requestObject;
+    JsonArrayRequest requestArray;
     private CustomProgressDialog pDialog;
     private String careerId;
     private ArrayList<Wage> wageList = new ArrayList<>();
     private WageAdapter wageAdapter;
+    private ArrayList<Staff> staffList = new ArrayList<>();
+    private StaffAdapter staffAdapter;
 
     private CollapsingToolbarLayout collapsingToolbar;
-    private FloatingActionButton fab;
+    FloatingActionButton fab;
     private NetworkImageView thumbnail;
     private TextView attrText;
     private TextView genderText;
@@ -92,9 +99,10 @@ public class CareerViewActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CustomSelectListView.class);
-                intent.putExtra(CustomSelectListView.ID, careerId);
-                startActivity(intent);
+//                Intent intent = new Intent(v.getContext(), CustomSelectListView.class);
+//                intent.putExtra(CustomSelectListView.ID, careerId);
+//                startActivity(intent);
+                showStaffDialog();
             }
         });
 
@@ -113,6 +121,7 @@ public class CareerViewActivity extends AppCompatActivity {
 
         wageAdapter = new WageAdapter(this, wageList);
         wageListView.setAdapter(wageAdapter);
+
     }
 
     private void initData() {
@@ -170,6 +179,57 @@ public class CareerViewActivity extends AppCompatActivity {
             }
         });
         Application.getInstance().addToRequestQueue(requestArray, REQ_CAREER_WAGE);
+
+        // get Staff
+        requestArray = new JsonArrayRequest(Application.CAREER_STAFF + careerId, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d(Application.TAG, response.toString());
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Staff staff = new Staff();
+                        staff.setId(obj.optString("id"));
+                        staff.setNickname(obj.optString("nickname"));
+                        staff.setPhone(obj.optString("phone"));
+                        staffList.add(staff);
+                    }
+                    staffAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                pDialog.hide();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(Application.TAG, "Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        });
+        Application.getInstance().addToRequestQueue(requestArray, REQ_CAREER_STAFF);
+    }
+
+    private void showStaffDialog() {
+        // Staff
+        staffAdapter = new StaffAdapter(this, staffList);
+        ListView listView = new ListView(this);
+        listView.setAdapter(staffAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Staff staff = staffList.get(position);
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + staff.getPhone()));
+                startActivity(callIntent);
+            }
+        });
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setCancelable(true);
+        dialog.setView(listView);
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
     }
 
     @Override

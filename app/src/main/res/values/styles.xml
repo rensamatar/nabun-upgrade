@@ -34,7 +34,8 @@
     <item name="android:gravity">center</item>
     <item name="android:layout_marginTop">@dimen/dimens_20dp</item>
     <item name="android:layout_marginBottom">@dimen/dimens_20dp</item>
-    <item name="android:textSize">@dimen/material_text_headline</item>
+    <item name="android:textSize">@dimen/material_text_subhead</item>
+    <item name="android:textStyle">bold</item>
   </style>
   <style name="DetailListItem">
     <item name="android:layout_width">match_parent</item>

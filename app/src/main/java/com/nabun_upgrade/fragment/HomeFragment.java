@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +14,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.nabun_upgrade.adapter.DemoPageAdapter;
-import com.nabun_upgrade.nabun.CareerViewActivity;
 import com.nabun_upgrade.nabun.R;
-import com.nabun_upgrade.utility.CustomSelectListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by admin on 9/24/2015.
@@ -91,14 +85,7 @@ public class HomeFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         listView.setAdapter(new HomeAdapter(getActivity(), R.layout.home_list_item, mHomeList));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), CustomSelectListView.class);
-                getActivity().startActivity(intent);
-            }
-        });
-
+        
         return rootView;
     }
 

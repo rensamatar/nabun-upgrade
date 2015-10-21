@@ -18,8 +18,8 @@ import com.nabun_upgrade.nabun.R;
  */
 public class CustomProgressDialog extends ProgressDialog {
 
-    private AnimationDrawable animation = null;
-    private ImageView imgProgress;
+    AnimationDrawable animation = null;
+    ImageView imgProgress;
 
     public CustomProgressDialog(Context context) {
         super(context);
